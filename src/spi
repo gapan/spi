@@ -55,10 +55,10 @@ def update():
 def slaptsrcdeps(pkglist):
 	deps = []
 	DEVNULL = open('/dev/null', 'w')
-	for pkg, pkgver in pkglist:
+	for pkg in pkglist:
 		args1 = ['yes', 'n']
 		p1 = subprocess.Popen(args1, stdout=subprocess.PIPE, stderr=DEVNULL)
-		args2 = ['slapt-src', '-i', pkg+':'+pkgver]
+		args2 = [slaptsrc, '-i', pkg]
 		env = dict()
 		for i in initial_env:
 			env[i] = initial_env[i]
