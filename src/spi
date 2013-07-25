@@ -8,6 +8,9 @@ import subprocess
 slaptget = '/usr/sbin/slapt-get'
 slaptsrc = '/usr/bin/slapt-src'
 
+# create a copy of the default environment
+initial_env = dict()
+
 def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "hu", ["help", "update"])
@@ -55,28 +58,18 @@ def update():
 def slaptsrcdeps(pkg):
 	deps = []
 	DEVNULL = open('/dev/null', 'w')
-	args1 = ['yes', 'n']
-	p1 = subprocess.Popen(args1, stdout=subprocess.PIPE, stderr=DEVNULL)
-	args2 = [slaptsrc, '-i', pkg]
+	args = [slaptsrc, '--show', pkg]
 	env = dict()
 	for i in initial_env:
 		env[i] = initial_env[i]
 	env['LANG'] = 'C'
-	p2 = subprocess.Popen(args2, stdin=p1.stdout, stdout=subprocess.PIPE, stderr=DEVNULL,env=env)
-	p1.stdout.close()
-	output = p2.communicate()[0]
-	found = False
+	p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL,env=env)
+	output = p.communicate()[0]
 	data = ''
 	for line in output.splitlines():
-		if line.startswith('The following dependent slackbuilds'):
-			found = True
-			continue
-		if found is True:
-			if line.startswith('Do you want to continue'):
-				break
-			else:
-				data = ' '.join([data, line])
-	newdeps = data.replace('\n', ' ').strip(' ').split(' ')
+		if line.startswith('SlackBuild Requires:'):
+			data = line.partition(':')[2]
+	newdeps = data.replace('\n', ',').strip(' ').split(',')
 	for i in newdeps:
 		if i is not '' and i != '%README%':
 			if i not in deps:
