@@ -1,0 +1,5 @@
+spi (Salix Package Installer) is supposed to become a command line tool
+that will act as an interface to both slapt-get and slapt-src to make it
+easier to find and install software in Salix.
+
+It is obviously not ready yet.
