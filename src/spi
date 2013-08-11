@@ -13,8 +13,10 @@ initial_env = dict()
 
 def main(argv):
 	try:
-		opts, args = getopt.getopt(argv, "hu", ["help", "update"])
+		opts, args = getopt.getopt(argv, "huis", ["help",
+			"update", "install", "search"])
 		
+		action = "search"
 		for opt, arg in opts:
 			if opt in ("-h", "--help"):
 				usage()
@@ -22,35 +24,152 @@ def main(argv):
 			elif opt in ("-u", "--update"):
 				retval = update()
 				sys.exit(retval)
+			elif opt in ("-i", "--install"):
+				action = "install"
+			elif opt in ("-s", "--search"):
+				pass
 		if not len(args) > 0:
 			usage()
 			sys.exit(0)
-		search(args)
+		if action == "install":
+			install(args)
+		elif action == "search":
+			search(args)
 
 	except getopt.GetoptError:
 		usage()
-		sys.exit(2)
+		sys.exit(1)
 
-def search(args):
-	print "Packages available through slapt-get/gslapt:"
+def pkg_installed():
+	pkg_installed = []
+	for i in os.listdir('/var/log/packages'):
+		pkg_installed.append(i.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0])
+	return pkg_installed
+
+def pkglist(args):
 	cmd = [slaptget, '--search']
 	for arg in args:
 		cmd.append(arg)
-	p = subprocess.Popen(cmd)
-	p.wait()
-	print "\nPackages available through slapt-src/sourcery:"
+	env = dict()
+	for i in initial_env:
+		env[i] = initial_env[i]
+	env['LANG'] = 'C'
+	p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+			stderr=subprocess.PIPE, env=env)
+	pkglist_output = p.communicate()[0]
+	status = p.returncode
+	pkglist_output = pkglist_output.splitlines()
+	pkgs = []
+	pkgnames = []
+	for line in pkglist_output:
+		pkgfullname = line.partition('[inst=')[0]
+		pkgshortname = pkgfullname.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
+		if pkgshortname not in pkgnames:
+			pkgnames.append(pkgshortname)
+			if pkgshortname in pkg_installed():
+				pkginst = True
+			else:
+				pkginst = False
+			pkgdesc = line.partition(']: ')[2] 
+			pkgs.append([pkgshortname, pkginst, pkgdesc])
+	return pkgs
+
+def slackbuildlist(args):
 	cmd = [slaptsrc, '--search']
 	for arg in args:
 		cmd.append(arg)
-	p = subprocess.Popen(cmd)
-	p.wait()
+	env = dict()
+	for i in initial_env:
+		env[i] = initial_env[i]
+	env['LANG'] = 'C'
+	p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+			stderr=subprocess.PIPE, env=env)
+	pkglist_output = p.communicate()[0]
+	status = p.returncode
+	pkglist_output = pkglist_output.splitlines()
+	pkgs = []
+	pkgnames = []
+	for line in pkglist_output:
+		pkgfullname = line.partition(' - ')[0]
+		pkgshortname = pkgfullname.rpartition(':')[0]
+		if pkgshortname not in pkgnames:
+			pkgnames.append(pkgshortname)
+			if pkgshortname in pkg_installed():
+				pkginst = True
+			else:
+				pkginst = False
+			pkgdesc = line.partition(' - ')[2] 
+			pkgs.append([pkgshortname, pkginst, pkgdesc])
+	return pkgs
 
-def update():
-	print "Updating slapt-get cache..."
-	p = subprocess.Popen([slaptget, '--update'])
+def search(args):
+	print "Available packages:"
+	pl = pkglist(args)
+	if pl == []:
+		print "None"
+	else:
+		for i in pl:
+			pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
+			if pkginst is True:
+				pkginst = 'yes'
+			else:
+				pkginst = 'no'
+			print pkgname+' [inst='+pkginst+']:', pkgdesc
+	print "\nAvailable SlackBuilds:"
+	sl = slackbuildlist(args)
+	if sl == []:
+		print "None"
+	else:
+		for i in sl:
+			pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
+			if pkginst is True:
+				pkginst = 'yes'
+			else:
+				pkginst = 'no'
+			print pkgname+' [inst='+pkginst+']:', pkgdesc
+
+def install(args):
+	pl = pkglist(args)
+	sl = slackbuildlist(args)
+	p = []
+	for i in pl:
+		p.append(i[0])
+	s = []
+	for i in sl:
+		s.append(i[0])
+	for arg in args:
+		if arg not in pkg_installed():
+			if arg in p:
+				installpkg(arg)
+			elif arg in s:
+				installsb(arg)
+			else:
+				print arg, 'not found'
+				sys.exit(1)
+
+def installpkg(pkg):
+	p = subprocess.Popen([slapt-get, '--no-prompt', '--install',
+		pkg])
 	retval = p.wait()
 	if retval != 0:
-		print "\nUpdating slapt-src cache..."
+		sys.exit(retval)
+
+def installsb(slackbuild):
+	deps = slaptsrcdeps(slackbuild)
+	if deps != []:
+		install(deps)
+	p = subprocess.Popen([slaptsrc, '--no-dep', '--yes', '--install',
+		slackbuild])
+	retval = p.wait()
+	if retval != 0:
+		sys.exit(retval)
+
+def update():
+	print "Updating package cache..."
+	p = subprocess.Popen([slaptget, '--update'])
+	retval = p.wait()
+	if retval == 0:
+		print "\nUpdating SlackBuild cache..."
 		p = subprocess.Popen([slaptsrc, '--update'])
 		retval = p.wait()
 	return retval
@@ -63,7 +182,7 @@ def slaptsrcdeps(pkg):
 	for i in initial_env:
 		env[i] = initial_env[i]
 	env['LANG'] = 'C'
-	p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL,env=env)
+	p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL, env=env)
 	output = p.communicate()[0]
 	data = ''
 	for line in output.splitlines():
@@ -81,9 +200,14 @@ def usage():
 	print 'USAGE:', os.path.basename(sys.argv[0]),'[OPTIONS] [STRING(s)]'
 	print
 	print 'OPTIONS:'
-	print '   -u, --update       update slapt-get and slapt-src caches'
-	print '   -h, --help         this help message'
+	print '   -u, --update      ','update package and SlackBuild caches'
+	print '   -s, --search      ','search for specified packages (default action)'
+	print '   -i, --install     ','install specified packages'
+	print '   -h, --help        ','this help message'
 
 
 if __name__ == "__main__":
-	main(sys.argv[1:])
+	try:
+		main(sys.argv[1:])
+	except KeyboardInterrupt:
+		sys.exit(2)
