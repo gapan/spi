@@ -148,7 +148,7 @@ def install(args):
 				sys.exit(1)
 
 def installpkg(pkg):
-	p = subprocess.Popen([slapt-get, '--no-prompt', '--install',
+	p = subprocess.Popen([slaptget, '--no-prompt', '--install',
 		pkg])
 	retval = p.wait()
 	if retval != 0:
