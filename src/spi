@@ -144,7 +144,7 @@ def install(args):
 			elif arg in s:
 				installsb(arg)
 			else:
-				print arg, 'not found'
+				print 'No such package or SlackBuild: '+arg
 				sys.exit(1)
 
 def installpkg(pkg):
