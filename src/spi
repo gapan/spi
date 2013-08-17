@@ -13,8 +13,8 @@ initial_env = dict()
 
 def main(argv):
 	try:
-		opts, args = getopt.getopt(argv, "huis", ["help",
-			"update", "install", "search"])
+		opts, args = getopt.getopt(argv, "huUis", ["help",
+			"update", "upgrade" , "install", "search"])
 		
 		action = "search"
 		for opt, arg in opts:
@@ -23,6 +23,9 @@ def main(argv):
 				sys.exit(0)
 			elif opt in ("-u", "--update"):
 				retval = update()
+				sys.exit(retval)
+			elif opt in ("-U", "--upgrade"):
+				retval = upgrade()
 				sys.exit(retval)
 			elif opt in ("-i", "--install"):
 				action = "install"
@@ -174,6 +177,11 @@ def update():
 		retval = p.wait()
 	return retval
 
+def upgrade():
+	p = subprocess.Popen([slaptget, '--upgrade'])
+	retval = p.wait()
+	return retval
+
 def slaptsrcdeps(pkg):
 	deps = []
 	DEVNULL = open('/dev/null', 'w')
@@ -201,6 +209,7 @@ def usage():
 	print
 	print 'OPTIONS:'
 	print '   -u, --update      ','update package and SlackBuild caches'
+	print '   -U, --upgrade     ','upgrade packages'
 	print '   -s, --search      ','search for specified packages (default action)'
 	print '   -i, --install     ','install specified packages'
 	print '   -h, --help        ','this help message'
