@@ -1,0 +1,122 @@
+spi
+George Vlahavas
+%%mtime(%m/%d/%Y)
+
+%!target: man
+%!encoding: utf-8
+
+= NAME =
+
+spi - Salix Package Installer
+
+
+= SYNOPSIS =
+
+**spi** [//OPTIONS//] [//STRING(S)//]
+
+
+= DESCRIPTION =
+
+**spi** is a command line tool that acts as a wrapper around
+**slapt-get** and **slapt-src**. It uses both tools to search for and
+install software.
+
+Software that can be installed using **slapt-get** comes as pre-built
+binary packages. Software that can be installed using **slapt-src**
+comes in the form of SlackBuilds, which are scripts that describe how to
+compile the software from source and create a package that can be
+installed.
+
+When searching for software, **spi** will display search results from
+both **slapt-get** and **slapt-src** that match the search criteria.
+
+When installing software, **spi** will try to find and install pre-built
+binary packages using **slapt-get**. Failing that, it will try to find,
+build and install packages using **slapt-src**. The most useful feature
+of **spi** is probably that when a SlackBuild has a dependency that is
+available as a pre-built binary package, it will install it using
+**slapt-get**. If only **slapt-src** was used, building the package
+using the SlackBuild would have failed and the user would have to install
+the missing dependency separately using **slapt-get** and then running
+**slapt-src** again.
+
+Only the most basic functionality of **slapt-get** and **slapt-src** is
+implemented in **spi**. If advanced features of **slapt-get** and
+**slapt-src** are needed, then these tools should be used directly.
+
+= OPTIONS =
+
+: **-u, --update**
+update the package and SlackBuild local caches. This runs 
+**slapt-get --update** and if that is completed succesfully, it also
+runs **slapt-src --update**.
+
+: **-U, --upgrade**
+upgrade packages using slapt-get. This is exactly the same as running
+**slapt-get --upgrade**.
+
+: **-s, --search** //STRING(S)//
+search both the package and SlackBuild databases for software. This
+is the default action when running **spi**, meaning that if you specify
+one or more strings, without specifying any other options, a search will
+be performed using those strings. It is possible to use regular
+expressions in the search strings.
+
+: **-i, --install** //PACKAGE(S)//
+install specified packages. If packages are available through
+**slapt-get** then they are pulled and installed from the respective
+binary package repositories. If there are no packages by the names
+provided through **slapt-get**, then the packages are built and
+installed using the respective SlackBuilds using **slapt-src**. If
+any of the SlackBuild's dependencies are available as binary packages
+through **slapt-get**, then they are installed by using **slapt-get**.
+It is not possible to upgrade packages using this option, as it would
+happen if you used the respective option with **slapt-get**. If an older
+version of the package is already installed, nothing will happen.
+
+
+= GENERAL OPTIONS =
+
+: **-h**
+Prints a usage message briefly summarizing all command-line options
+and exits.
+
+
+= EXAMPLES =
+
+: **spi browser**
+will search both package and SlackBuild repositories using the term
+"browser" for matches in name or description.
+
+: **spi -s browser**
+is equivalent to the previous example.
+
+: **spi browser mail**
+will search both package and SlackBuild repositories using both terms,
+"midori" and "mail". Matches for either term in the name or description
+are displayed.
+
+: **spi ^sl**
+will search both package and SlackBuild repositories for packages whose
+names starts with "sl"
+
+: **spi -i midori**
+will install a pre-built package by the name "midori", if it exists. If
+it does not exist, it will search the SlackBuild database and if a
+SlackBuild is available, it will build the package and install it using
+that SlackBuild. Dependencies will be resolved in any case.
+
+
+= WEBSITE =
+
+https://github.com/gapan/spi
+
+
+= AUTHORS =
+
+spi was written by George Vlahavas <vlahavas~at~gmail~dot~com>
+
+
+= SEE ALSO =
+
+**slapt-get**(8), **slapt-src**(8)
