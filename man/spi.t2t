@@ -74,6 +74,9 @@ It is not possible to upgrade packages using this option, as it would
 happen if you used the respective option with **slapt-get**. If an older
 version of the package is already installed, nothing will happen.
 
+: **-n, --no-colour**
+disables coloured output when searching for packages.
+
 
 = GENERAL OPTIONS =
 
