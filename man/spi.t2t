@@ -49,11 +49,11 @@ implemented in **spi**. If advanced features of **slapt-get** and
 : **-u, --update**
 update the package and SlackBuild local caches. This runs 
 **slapt-get --update** and if that is completed succesfully, it also
-runs **slapt-src --update**.
+runs **slapt-src --update**. This requires superuser priviliges.
 
 : **-U, --upgrade**
 upgrade packages using slapt-get. This is exactly the same as running
-**slapt-get --upgrade**.
+**slapt-get --upgrade**. This requires superuser priviliges.
 
 : **-s, --search** //STRING(S)//
 search both the package and SlackBuild databases for software. This
@@ -72,7 +72,8 @@ any of the SlackBuild's dependencies are available as binary packages
 through **slapt-get**, then they are installed by using **slapt-get**.
 It is not possible to upgrade packages using this option, as it would
 happen if you used the respective option with **slapt-get**. If an older
-version of the package is already installed, nothing will happen.
+version of the package is already installed, nothing will happen. This
+requires superuser priviliges.
 
 : **-n, --no-colour**
 disables coloured output when searching for packages.
