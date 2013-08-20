@@ -11,24 +11,28 @@ slaptsrc = '/usr/bin/slapt-src'
 # create a copy of the default environment
 initial_env = dict()
 
-class colours:
+class Colours:
 	RED = '\033[01;31m'
 	GREEN = '\033[01;32m'
 	RESET = '\033[00m'
-	
+
 	def disable(self):
 		self.RED = ''
 		self.GREEN = ''
 		self.RESET = ''
 
+colour = Colours()
+
 def main(argv):
 	try:
-		opts, args = getopt.getopt(argv, "huUis", ["help",
-			"update", "upgrade" , "install", "search"])
+		opts, args = getopt.getopt(argv, "nhuUis", ["no-colour",
+			"help", "update", "upgrade" , "install", "search"])
 		
 		action = "search"
 		for opt, arg in opts:
-			if opt in ("-h", "--help"):
+			if opt in ("-n", "--no-colour"):
+				colour.disable()
+			elif opt in ("-h", "--help"):
 				usage()
 				sys.exit(0)
 			elif opt in ("-u", "--update"):
@@ -54,10 +58,10 @@ def main(argv):
 		sys.exit(1)
 
 def string_red(string):
-	return colours.RED+string+colours.RESET
+	return colour.RED+string+colour.RESET
 
 def string_green(string):
-	return colours.GREEN+string+colours.RESET
+	return colour.GREEN+string+colour.RESET
 
 def pkg_installed():
 	pkg_installed = []
@@ -228,6 +232,7 @@ def usage():
 	print '   -U, --upgrade     ','upgrade packages'
 	print '   -s, --search      ','search for specified packages (default action)'
 	print '   -i, --install     ','install specified packages'
+	print '   -n, --no-colour   ','disable colour output'
 	print '   -h, --help        ','this help message'
 
 
