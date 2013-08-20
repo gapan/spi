@@ -11,6 +11,16 @@ slaptsrc = '/usr/bin/slapt-src'
 # create a copy of the default environment
 initial_env = dict()
 
+class colours:
+	RED = '\033[01;31m'
+	GREEN = '\033[01;32m'
+	RESET = '\033[00m'
+	
+	def disable(self):
+		self.RED = ''
+		self.GREEN = ''
+		self.RESET = ''
+
 def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "huUis", ["help",
@@ -42,6 +52,12 @@ def main(argv):
 	except getopt.GetoptError:
 		usage()
 		sys.exit(1)
+
+def string_red(string):
+	return colours.RED+string+colours.RESET
+
+def string_green(string):
+	return colours.GREEN+string+colours.RESET
 
 def pkg_installed():
 	pkg_installed = []
@@ -114,10 +130,10 @@ def search(args):
 		for i in pl:
 			pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
 			if pkginst is True:
-				pkginst = 'yes'
+				pkginst = string_green('Installed')
 			else:
-				pkginst = 'no'
-			print pkgname+' [inst='+pkginst+']:', pkgdesc
+				pkginst = string_red('Not installed')
+			print pkgname+' ['+pkginst+']:', pkgdesc
 	print "\nAvailable SlackBuilds:"
 	sl = slackbuildlist(args)
 	if sl == []:
@@ -126,10 +142,10 @@ def search(args):
 		for i in sl:
 			pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
 			if pkginst is True:
-				pkginst = 'yes'
+				pkginst = string_green('Installed')
 			else:
-				pkginst = 'no'
-			print pkgname+' [inst='+pkginst+']:', pkgdesc
+				pkginst = string_red('Not installed')
+			print pkgname+' ['+pkginst+']:', pkgdesc
 
 def install(args):
 	pl = pkglist(args)
