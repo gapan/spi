@@ -36,12 +36,15 @@ def main(argv):
 				usage()
 				sys.exit(0)
 			elif opt in ("-u", "--update"):
+				check_for_root()
 				retval = update()
 				sys.exit(retval)
 			elif opt in ("-U", "--upgrade"):
+				check_for_root()
 				retval = upgrade()
 				sys.exit(retval)
 			elif opt in ("-i", "--install"):
+				check_for_root()
 				action = "install"
 			elif opt in ("-s", "--search"):
 				pass
@@ -55,6 +58,11 @@ def main(argv):
 
 	except getopt.GetoptError:
 		usage()
+		sys.exit(1)
+
+def check_for_root():
+	if os.geteuid() != 0:
+		print "This action requires root priviliges."
 		sys.exit(1)
 
 def string_red(string):
