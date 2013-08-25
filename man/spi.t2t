@@ -97,7 +97,7 @@ is equivalent to the previous example.
 
 : **spi browser mail**
 will search both package and SlackBuild repositories using both terms,
-"midori" and "mail". Matches for either term in the name or description
+"browser" and "mail". Matches for either term in the name or description
 are displayed.
 
 : **spi ^sl**
