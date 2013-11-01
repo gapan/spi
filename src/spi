@@ -25,8 +25,8 @@ colour = Colours()
 
 def main(argv):
 	try:
-		opts, args = getopt.getopt(argv, "nhuUis", ["no-colour",
-			"help", "update", "upgrade" , "install", "search"])
+		opts, args = getopt.getopt(argv, "nhuUiSs", ["no-colour",
+			"help", "update", "upgrade" , "install", "simulate", "search"])
 		
 		action = "search"
 		for opt, arg in opts:
@@ -46,6 +46,9 @@ def main(argv):
 			elif opt in ("-i", "--install"):
 				check_for_root()
 				action = "install"
+				for opt, arg in opts:
+					if opt in ("-S", "--simulate"):
+                                            action = "simulate"
 			elif opt in ("-s", "--search"):
 				pass
 		if not len(args) > 0:
@@ -53,6 +56,8 @@ def main(argv):
 			sys.exit(0)
 		if action == "install":
 			install(args)
+                if action == "simulate":
+                        simulate(args)
 		elif action == "search":
 			search(args)
 
@@ -62,7 +67,7 @@ def main(argv):
 
 def check_for_root():
 	if os.geteuid() != 0:
-		print "This action requires root priviliges."
+		print "This action requires root privileges."
 		sys.exit(1)
 
 def string_red(string):
@@ -159,6 +164,63 @@ def search(args):
 				pkginst = string_red('Not installed')
 			print pkgname+' ['+pkginst+']:', pkgdesc
 
+def available (pkgs, slapt, src):## no circular dependency checking
+	pl = pkglist(pkgs) 										
+ 	sl = slackbuildlist(pkgs)							
+ 	p = []			# p, s = list of available software on this iteration, filtering out duplicates		
+ 	unmet = []
+ 	for i in pl:
+ 		if i[0]  not in slapt and i[1] == False:    # slapt, src = accumulators for wanted packages turned up in all iterations
+ 			p.append(i[0])			    # add package to p if it's not in slapt yet
+ 	s = []											
+ 	for i in sl:
+ 		if i[0] not in src and i[1] == False:	    # add it to s if it's not in 'src' yet 
+ 			s.append(i[0])							
+ 	for pkg in pkgs:
+ 		if pkg in p:				    # we want this from the repos (not currently installed)
+ 			slapt.append(pkg)
+ 		elif pkg in s:			        	# we want this from src
+ 			src.append(pkg)
+ 			deps = slaptsrcdeps(pkg)		# find its deps
+ 			depslapt, depsrc, missing = available (deps, slapt, src)    # check those deps for their own deps
+ 			for dep in depslapt:
+ 				if dep not in slapt:				    # if dep's in the repos add to slapt, avoiding duplicates
+ 					slapt.append(dep)						
+ 			for dep in depsrc:
+ 				if dep not in src:				# if available from src, add to 'src', avoiding duplicates
+ 					src.append(dep)
+ 			for dep in missing:
+ 				if dep not in unmet:
+ 					unmet.append(dep)					# avoid duplicates
+ 		elif pkg not in slapt and pkg not in src and pkg not in pkg_installed():	# exclude cases where a dep has already been referenced in a prior iteration (so we didn't look this time)
+ 			unmet.append(pkg)							## that means we won't notice circular deps either :(
+ 	return slapt, src, unmet								## but our flat data structure means we can't tell those apart from two apps sharing a dep
+ 
+def simulate(args):
+ 	slapt, src, unmet = available(args, [], [])
+ 	if unmet != []:
+ 		print 'The following packages are unavailable: ',
+ 		for i in unmet:
+ 			print i,
+ 		print
+ 		sys.exit(1)
+ 	if slapt != []:
+ 		simpkg(slapt)
+ 	if src != []:
+ 		print 'The following packages will be built from source: ',
+ 		for i in src:
+ 			print i,
+ 		print
+ 
+def simpkg(pkgs):
+ 	cmd = [slaptget, '--install', '--simulate']
+ 	for pkg in pkgs:
+ 		cmd.append(pkg)
+ 	p = subprocess.Popen(cmd)
+ 	retval = p.wait()
+ 	if retval != 0:
+ 		sys.exit(retval)
+ 
 def install(args):
 	pl = pkglist(args)
 	sl = slackbuildlist(args)
@@ -240,6 +302,7 @@ def usage():
 	print '   -U, --upgrade     ','upgrade packages'
 	print '   -s, --search      ','search for specified packages (default action)'
 	print '   -i, --install     ','install specified packages'
+	print '   -S, --simulate    ','simulate installation of specified packages'
 	print '   -n, --no-colour   ','disable colour output'
 	print '   -h, --help        ','this help message'
 
