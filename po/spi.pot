@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-20 14:01+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/spi:65
+msgid "This action requires root priviliges."
+msgstr ""
+
+#: src/spi:137
+msgid "Available packages:"
+msgstr ""
+
+#: src/spi:140 src/spi:152
+msgid "None"
+msgstr ""
+
+#: src/spi:145 src/spi:157
+msgid "Installed"
+msgstr ""
+
+#: src/spi:147 src/spi:159
+msgid "Not installed"
+msgstr ""
+
+#: src/spi:149
+msgid "Available SlackBuilds:"
+msgstr ""
+
+#: src/spi:178
+msgid "No such package or SlackBuild:"
+msgstr ""
+
+#: src/spi:199
+msgid "Updating package cache..."
+msgstr ""
+
+#: src/spi:203
+msgid "Updating SlackBuild cache..."
+msgstr ""
+
+#: src/spi:236
+msgid "USAGE:"
+msgstr ""
+
+#: src/spi:236
+msgid "[OPTIONS] [STRING(s)]"
+msgstr ""
+
+#: src/spi:239
+msgid "update package and SlackBuild caches"
+msgstr ""
+
+#: src/spi:240
+msgid "upgrade packages"
+msgstr ""
+
+#: src/spi:241
+msgid "search for specified packages (default action)"
+msgstr ""
+
+#: src/spi:242
+msgid "install specified packages"
+msgstr ""
+
+#: src/spi:243
+msgid "disable colour output"
+msgstr ""
+
+#: src/spi:244
+msgid "this help message"
+msgstr ""
