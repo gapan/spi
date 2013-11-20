@@ -62,7 +62,7 @@ def main(argv):
 
 def check_for_root():
 	if os.geteuid() != 0:
-		print "This action requires root priviliges."
+		print _('This action requires root priviliges.')
 		sys.exit(1)
 
 def string_red(string):
@@ -134,29 +134,29 @@ def slackbuildlist(args):
 	return pkgs
 
 def search(args):
-	print "Available packages:"
+	print _('Available packages:')
 	pl = pkglist(args)
 	if pl == []:
-		print "None"
+		print _('None')
 	else:
 		for i in pl:
 			pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
 			if pkginst is True:
-				pkginst = string_green('Installed')
+				pkginst = string_green(_('Installed'))
 			else:
-				pkginst = string_red('Not installed')
+				pkginst = string_red(_('Not installed'))
 			print pkgname+' ['+pkginst+']:', pkgdesc
-	print "\nAvailable SlackBuilds:"
+	print "\n"+_('Available SlackBuilds:')
 	sl = slackbuildlist(args)
 	if sl == []:
-		print "None"
+		print _('None')
 	else:
 		for i in sl:
 			pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
 			if pkginst is True:
-				pkginst = string_green('Installed')
+				pkginst = string_green(_('Installed'))
 			else:
-				pkginst = string_red('Not installed')
+				pkginst = string_red(_('Not installed'))
 			print pkgname+' ['+pkginst+']:', pkgdesc
 
 def install(args):
@@ -175,7 +175,7 @@ def install(args):
 			elif arg in s:
 				installsb(arg)
 			else:
-				print 'No such package or SlackBuild: '+arg
+				print _('No such package or SlackBuild:')+' '+arg
 				sys.exit(1)
 
 def installpkg(pkg):
@@ -196,11 +196,11 @@ def installsb(slackbuild):
 		sys.exit(retval)
 
 def update():
-	print "Updating package cache..."
+	print _('Updating package cache...')
 	p = subprocess.Popen([slaptget, '--update'])
 	retval = p.wait()
 	if retval == 0:
-		print "\nUpdating SlackBuild cache..."
+		print "\n"+_('Updating SlackBuild cache...')
 		p = subprocess.Popen([slaptsrc, '--update'])
 		retval = p.wait()
 	return retval
@@ -233,15 +233,15 @@ def slaptsrcdeps(pkg):
 	return deps
 
 def usage():
-	print 'USAGE:', os.path.basename(sys.argv[0]),'[OPTIONS] [STRING(s)]'
+	print _('USAGE:'), os.path.basename(sys.argv[0]),_('[OPTIONS] [STRING(s)]')
 	print
 	print 'OPTIONS:'
-	print '   -u, --update      ','update package and SlackBuild caches'
-	print '   -U, --upgrade     ','upgrade packages'
-	print '   -s, --search      ','search for specified packages (default action)'
-	print '   -i, --install     ','install specified packages'
-	print '   -n, --no-colour   ','disable colour output'
-	print '   -h, --help        ','this help message'
+	print '   -u, --update      ',_('update package and SlackBuild caches')
+	print '   -U, --upgrade     ',_('upgrade packages')
+	print '   -s, --search      ',_('search for specified packages (default action)')
+	print '   -i, --install     ',_('install specified packages')
+	print '   -n, --no-colour   ',_('disable colour output')
+	print '   -h, --help        ',_('this help message')
 
 
 if __name__ == "__main__":
