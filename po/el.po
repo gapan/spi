@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: spi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-20 14:01+0200\n"
+"PO-Revision-Date: 2013-11-20 14:20+0200\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: src/spi:149
+msgid "Available SlackBuilds:"
+msgstr "Διαθέσιμα SlackBuilds:"
+
+#: src/spi:137
+msgid "Available packages:"
+msgstr "Διαθέσιμα πακέτα:"
+
+#: src/spi:145 src/spi:157
+msgid "Installed"
+msgstr "Εγκατεστημένο"
+
+#: src/spi:178
+msgid "No such package or SlackBuild:"
+msgstr "Δεν υπάρχει πακέτο ή SlackBuild με αυτό το όνομα:"
+
+#: src/spi:140 src/spi:152
+msgid "None"
+msgstr "Κανένα"
+
+#: src/spi:147 src/spi:159
+msgid "Not installed"
+msgstr "Μη εγκατεστημένο"
+
+#: src/spi:65
+msgid "This action requires root priviliges."
+msgstr "Η επιλογή αυτή απαιτεί δικαιώματα υπερχρήστη."
+
+#: src/spi:236
+msgid "USAGE:"
+msgstr "ΧΡΗΣΗ:"
+
+#: src/spi:203
+msgid "Updating SlackBuild cache..."
+msgstr "Ενημέρωση της τοπικής μνήμης SlackBuild..."
+
+#: src/spi:199
+msgid "Updating package cache..."
+msgstr "Ενημέρωση της τοπικής μνήμης πακέτων..."
+
+#: src/spi:236
+msgid "[OPTIONS] [STRING(s)]"
+msgstr "[ΕΠΙΛΟΓΕΣ] [ΛΕΞΗ/ΛΕΞΕΙΣ]"
+
+#: src/spi:243
+msgid "disable colour output"
+msgstr "απενεργοποίηση έγχρωμης εξόδου"
+
+#: src/spi:242
+msgid "install specified packages"
+msgstr "εγκατάσταση πακέτων"
+
+#: src/spi:241
+msgid "search for specified packages (default action)"
+msgstr "αναζήτηση πακέτων (εξ ορισμού επιλογή)"
+
+#: src/spi:244
+msgid "this help message"
+msgstr "το παρόν μήνυμα βοήθειας"
+
+#: src/spi:239
+msgid "update package and SlackBuild caches"
+msgstr "ενημέρωση της τοπικής μνήμης πακέτων και SlackBuild"
+
+#: src/spi:240
+msgid "upgrade packages"
+msgstr "αναβάθμιση πακέτων"
