@@ -36,4 +36,4 @@ install:
 	install -Dm 644 man/spi.man $(DESTDIR)/$(PREFIX)/man/man8/spi.8
 
 
- .PHONY: all man mo updatepo pot clean install
+.PHONY: all man mo updatepo pot clean install
