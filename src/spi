@@ -5,6 +5,11 @@ import sys
 import os
 import subprocess
 
+# Internationalization
+import locale
+import gettext
+gettext.install("spi", "/usr/share/locale", unicode=1)
+
 slaptget = '/usr/sbin/slapt-get'
 slaptsrc = '/usr/bin/slapt-src'
 
