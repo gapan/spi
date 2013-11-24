@@ -116,7 +116,7 @@ that SlackBuild. Dependencies will be resolved in any case.
 
 : **spi -s -i midori rkhunter**
 will simulate the installation of packages named "midori" and "rkhunter"
-showing a list of packages and SlackBuilds that will have to be
+showing a list of packages and SlackBuilds that will be
 installed, including dependencies.
 
 
