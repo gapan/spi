@@ -308,7 +308,7 @@ def slaptsrcdeps(pkg):
 def usage():
 	print _('USAGE:'), os.path.basename(sys.argv[0]),_('[OPTIONS] [STRING(s)]')
 	print
-	print 'OPTIONS:'
+	print _('OPTIONS:')
 	print '       --search      ',_('search for specified packages (default action)')
 	print '   -u, --update      ',_('update package and SlackBuild caches')
 	print '   -U, --upgrade     ',_('upgrade packages')
