@@ -47,6 +47,13 @@ implemented in **spi**. If advanced features of **slapt-get** and
 
 = OPTIONS =
 
+: **--search** //STRING(S)//
+search both the package and SlackBuild databases for software. This
+is the default action when running **spi**, meaning that if you specify
+one or more strings, without specifying any other options, a search will
+be performed using those strings. It is possible to use regular
+expressions in the search strings.
+
 : **-u, --update**
 update the package and SlackBuild local caches. This runs 
 **slapt-get --update** and if that is completed succesfully, it also
@@ -56,12 +63,11 @@ runs **slapt-src --update**. This requires superuser priviliges.
 upgrade packages using slapt-get. This is exactly the same as running
 **slapt-get --upgrade**. This requires superuser priviliges.
 
-: **-s, --search** //STRING(S)//
-search both the package and SlackBuild databases for software. This
-is the default action when running **spi**, meaning that if you specify
-one or more strings, without specifying any other options, a search will
-be performed using those strings. It is possible to use regular
-expressions in the search strings.
+: **-s, --simulate**
+can be specified along with **--install** and will only simulate the
+installation of the specified packages and SlackBuilds, showing a list
+of packages and SlackBuilds that will be installed if the same command
+will be run with **--simulate**, including any dependencies.
 
 : **-i, --install** //PACKAGE(S)//
 install specified packages. If packages are available through
@@ -93,9 +99,6 @@ and exits.
 will search both package and SlackBuild repositories using the term
 "browser" for matches in name or description.
 
-: **spi -s browser**
-is equivalent to the previous example.
-
 : **spi browser mail**
 will search both package and SlackBuild repositories using both terms,
 "browser" and "mail". Matches for either term in the name or description
@@ -110,6 +113,11 @@ will install a pre-built package by the name "midori", if it exists. If
 it does not exist, it will search the SlackBuild database and if a
 SlackBuild is available, it will build the package and install it using
 that SlackBuild. Dependencies will be resolved in any case.
+
+: **spi -s -i midori rkhunter**
+will simulate the installation of packages named "midori" and "rkhunter"
+showing a list of packages and SlackBuilds that will have to be
+installed, including dependencies.
 
 
 = WEBSITE =
