@@ -31,9 +31,10 @@ colour = Colours()
 def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "nhuUis", ["no-colour",
-			"help", "update", "upgrade" , "install", "search"])
+			"help", "update", "upgrade" , "install", "search", "simulate"])
 		
-		action = "search"
+		do_install = False
+		do_simulate = False
 		for opt, arg in opts:
 			if opt in ("-n", "--no-colour"):
 				colour.disable()
@@ -41,24 +42,26 @@ def main(argv):
 				usage()
 				sys.exit(0)
 			elif opt in ("-u", "--update"):
-				check_for_root()
 				retval = update()
 				sys.exit(retval)
 			elif opt in ("-U", "--upgrade"):
-				check_for_root()
 				retval = upgrade()
 				sys.exit(retval)
 			elif opt in ("-i", "--install"):
-				check_for_root()
-				action = "install"
-			elif opt in ("-s", "--search"):
+				do_install = True
+			elif opt in ("-s", "--simulate"):
+				do_simulate = True
+			elif opt in ("--search"):
 				pass
 		if not len(args) > 0:
 			usage()
 			sys.exit(0)
-		if action == "install":
-			install(args)
-		elif action == "search":
+		if do_install:
+			if do_simulate:
+				simulate(args)
+			else:
+				install(args)
+		else:
 			search(args)
 
 	except getopt.GetoptError:
@@ -164,7 +167,41 @@ def search(args):
 				pkginst = string_red(_('Not installed'))
 			print pkgname+' ['+pkginst+']:', pkgdesc
 
+def simulate(args, done=True, pqeue=[], sqeue=[], installed=[]):
+	pl = pkglist(args)
+	sl = slackbuildlist(args)
+	p = []
+	for i in pl:
+		p.append(i[0])
+	s = []
+	for i in sl:
+		s.append(i[0])
+	if installed == []:
+		installed = pkg_installed()
+	for arg in args:
+		if ((arg not in installed) and (arg not in pqeue) and (arg not in sqeue)):
+			if arg in p:
+				pqeue.append(arg)
+			elif arg in s:
+				sqeue.append(arg)
+				simulate(slaptsrcdeps(arg), False, pqeue, sqeue, installed)
+	if done:
+		pqeue = sorted(slaptgetdeps(pqeue))
+		sqeue = sorted(sqeue)
+		if pqeue != []:
+			print _('The following packages will be installed:'+'\n  '),
+			for i in pqeue:
+				print i,
+		if sqeue != []:
+			if pqeue != []:
+				print "\n"
+			print _('The following SlackBuilds will be installed:'+'\n  '),
+			for i in sqeue:
+				print i,
+		print ""
+
 def install(args):
+	check_for_root()
 	pl = pkglist(args)
 	sl = slackbuildlist(args)
 	p = []
@@ -201,6 +238,7 @@ def installsb(slackbuild):
 		sys.exit(retval)
 
 def update():
+	check_for_root()
 	print _('Updating package cache...')
 	p = subprocess.Popen([slaptget, '--update'])
 	retval = p.wait()
@@ -211,9 +249,32 @@ def update():
 	return retval
 
 def upgrade():
+	check_for_root()
 	p = subprocess.Popen([slaptget, '--upgrade'])
 	retval = p.wait()
 	return retval
+
+def slaptgetdeps(pkgs):
+	deps = []
+	DEVNULL = open('/dev/null', 'w')
+	args = [slaptget, '--simulate', '--install']
+	for i in pkgs:
+		args.append(i)
+	env = dict()
+	for i in initial_env:
+		env[i] = initial_env[i]
+	env['LANG'] = 'C'
+	p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL, env=env)
+	output = p.communicate()[0]
+	data = ''
+	for line in output.splitlines():
+		if line.endswith(' is to be installed'):
+			data = line.rpartition(' is to be installed')[0].rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
+			if data is not '':
+				if data not in deps:
+					deps.append(data)
+	DEVNULL.close()
+	return deps
 
 def slaptsrcdeps(pkg):
 	deps = []
@@ -241,9 +302,10 @@ def usage():
 	print _('USAGE:'), os.path.basename(sys.argv[0]),_('[OPTIONS] [STRING(s)]')
 	print
 	print 'OPTIONS:'
+	print '       --search      ',_('search for specified packages (default action)')
 	print '   -u, --update      ',_('update package and SlackBuild caches')
 	print '   -U, --upgrade     ',_('upgrade packages')
-	print '   -s, --search      ',_('search for specified packages (default action)')
+	print '   -s, --simulate    ',_('simulate installation of specified packages')
 	print '   -i, --install     ',_('install specified packages')
 	print '   -n, --no-colour   ',_('disable colour output')
 	print '   -h, --help        ',_('this help message')
