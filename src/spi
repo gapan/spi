@@ -62,7 +62,7 @@ def main(argv):
 
 def check_for_root():
 	if os.geteuid() != 0:
-		print _('This action requires root priviliges.')
+		print _('This action requires root privileges.')
 		sys.exit(1)
 
 def string_red(string):
