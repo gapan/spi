@@ -167,7 +167,7 @@ def search(args):
 				pkginst = string_red(_('Not installed'))
 			print pkgname+' ['+pkginst+']:', pkgdesc
 
-def simulate(args, done=True, pqeue=[], sqeue=[], installed=[]):
+def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
 	pl = pkglist(args)
 	sl = slackbuildlist(args) 
 	p = []
@@ -183,26 +183,26 @@ def simulate(args, done=True, pqeue=[], sqeue=[], installed=[]):
 		if arg not in both:
 			print _('No such package or SlackBuild:')+' '+arg
 			sys.exit(1)
-		if ((arg not in installed) and (arg not in pqeue) and (arg not in sqeue)):
+		if ((arg not in installed) and (arg not in pqueue) and (arg not in squeue)):
 			if arg in p:
-				pqeue.append(arg)
+				pqueue.append(arg)
 			elif arg in s:
-				sqeue.append(arg)
-				simulate(slaptsrcdeps(arg), False, pqeue, sqeue, installed)
+				squeue.append(arg)
+				simulate(slaptsrcdeps(arg), False, pqueue, squeue, installed)
 	if done:
-		pqeue = sorted(slaptgetdeps(pqeue))
-		sqeue = sorted(sqeue)
-		if pqeue != []:
+		pqueue = sorted(slaptgetdeps(pqueue))
+		squeue = sorted(squeue)
+		if pqueue != []:
 			print _('The following packages will be installed:'+'\n  '),
-			for i in pqeue:
+			for i in pqueue:
 				print i,
-		if sqeue != []:
-			if pqeue != []:
+		if squeue != []:
+			if pqueue != []:
 				print "\n"
 			print _('The following SlackBuilds will be installed:'+'\n  '),
-			for i in sqeue:
+			for i in squeue:
 				print i,
-		if ((pqeue == []) and (sqeue == [])):
+		if ((pqueue == []) and (squeue == [])):
 			print _('Nothing to install')
 		else:
 			print ""
