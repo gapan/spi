@@ -169,16 +169,20 @@ def search(args):
 
 def simulate(args, done=True, pqeue=[], sqeue=[], installed=[]):
 	pl = pkglist(args)
-	sl = slackbuildlist(args)
+	sl = slackbuildlist(args) 
 	p = []
 	for i in pl:
 		p.append(i[0])
 	s = []
 	for i in sl:
 		s.append(i[0])
+	both = p+s
 	if installed == []:
 		installed = pkg_installed()
 	for arg in args:
+		if arg not in both:
+			print _('No such package or SlackBuild:')+' '+arg
+			sys.exit(1)
 		if ((arg not in installed) and (arg not in pqeue) and (arg not in sqeue)):
 			if arg in p:
 				pqeue.append(arg)
