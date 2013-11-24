@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 14:01+0200\n"
+"POT-Creation-Date: 2013-11-24 15:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,70 +17,86 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/spi:65
-msgid "This action requires root priviliges."
+#: src/spi:73
+msgid "This action requires root privileges."
 msgstr ""
 
-#: src/spi:137
+#: src/spi:145
 msgid "Available packages:"
 msgstr ""
 
-#: src/spi:140 src/spi:152
+#: src/spi:148 src/spi:160
 msgid "None"
 msgstr ""
 
-#: src/spi:145 src/spi:157
+#: src/spi:153 src/spi:165
 msgid "Installed"
 msgstr ""
 
-#: src/spi:147 src/spi:159
+#: src/spi:155 src/spi:167
 msgid "Not installed"
 msgstr ""
 
-#: src/spi:149
+#: src/spi:157
 msgid "Available SlackBuilds:"
 msgstr ""
 
-#: src/spi:178
+#: src/spi:184 src/spi:227
 msgid "No such package or SlackBuild:"
 msgstr ""
 
-#: src/spi:199
+#: src/spi:196
+msgid "The following packages will be installed:"
+msgstr ""
+
+#: src/spi:202
+msgid "The following SlackBuilds will be installed:"
+msgstr ""
+
+#: src/spi:206
+msgid "Nothing to install"
+msgstr ""
+
+#: src/spi:249
 msgid "Updating package cache..."
 msgstr ""
 
-#: src/spi:203
+#: src/spi:253
 msgid "Updating SlackBuild cache..."
 msgstr ""
 
-#: src/spi:236
+#: src/spi:309
 msgid "USAGE:"
 msgstr ""
 
-#: src/spi:236
+#: src/spi:309
 msgid "[OPTIONS] [STRING(s)]"
 msgstr ""
 
-#: src/spi:239
-msgid "update package and SlackBuild caches"
-msgstr ""
-
-#: src/spi:240
-msgid "upgrade packages"
-msgstr ""
-
-#: src/spi:241
+#: src/spi:312
 msgid "search for specified packages (default action)"
 msgstr ""
 
-#: src/spi:242
+#: src/spi:313
+msgid "update package and SlackBuild caches"
+msgstr ""
+
+#: src/spi:314
+msgid "upgrade packages"
+msgstr ""
+
+#: src/spi:315
+msgid "simulate installation of specified packages"
+msgstr ""
+
+#: src/spi:316
 msgid "install specified packages"
 msgstr ""
 
-#: src/spi:243
+#: src/spi:317
 msgid "disable colour output"
 msgstr ""
 
-#: src/spi:244
+#: src/spi:318
 msgid "this help message"
 msgstr ""
