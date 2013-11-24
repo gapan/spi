@@ -198,7 +198,10 @@ def simulate(args, done=True, pqeue=[], sqeue=[], installed=[]):
 			print _('The following SlackBuilds will be installed:'+'\n  '),
 			for i in sqeue:
 				print i,
-		print ""
+		if ((pqeue == []) and (sqeue == [])):
+			print _('Nothing to install')
+		else:
+			print ""
 
 def install(args):
 	check_for_root()
