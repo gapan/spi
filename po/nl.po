@@ -3,105 +3,105 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# gapan <vlahavas@gmail.com>, 2013
+# Gambit <gambit73@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-24 19:24+0200\n"
-"PO-Revision-Date: 2013-11-26 20:20+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
-"Language-Team: Greek (http://www.transifex.com/projects/p/salix/language/el/)\n"
+"PO-Revision-Date: 2013-11-27 11:24+0000\n"
+"Last-Translator: Gambit <gambit73@gmail.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/salix/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: el\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/spi:73
 msgid "This action requires root privileges."
-msgstr "Η επιλογή αυτή απαιτεί δικαιώματα υπερχρήστη."
+msgstr "Deze actie vereist root privileges."
 
 #: src/spi:145
 msgid "Available packages:"
-msgstr "Διαθέσιμα πακέτα:"
+msgstr "Beschikbare pakketten:"
 
 #: src/spi:148 src/spi:160
 msgid "None"
-msgstr "Κανένα"
+msgstr "Geen"
 
 #: src/spi:153 src/spi:165
 msgid "Installed"
-msgstr "Εγκατεστημένο"
+msgstr "Geïnstalleerd"
 
 #: src/spi:155 src/spi:167
 msgid "Not installed"
-msgstr "Μη εγκατεστημένο"
+msgstr "Niet geïnstalleerd"
 
 #: src/spi:157
 msgid "Available SlackBuilds:"
-msgstr "Διαθέσιμα SlackBuilds:"
+msgstr "Beschikbare SlackBuilds:"
 
 #: src/spi:184 src/spi:227
 msgid "No such package or SlackBuild:"
-msgstr "Δεν υπάρχει πακέτο ή SlackBuild με αυτό το όνομα:"
+msgstr "Niets van dien aard als pakket of SlackBuild:"
 
 #: src/spi:196
 msgid "The following packages will be installed:"
-msgstr "Τα ακόλουθα πακέτα θα εγκατασταθούν:"
+msgstr "De volgende pakketten zullen worden geïnstalleerd:"
 
 #: src/spi:202
 msgid "The following SlackBuilds will be installed:"
-msgstr "Τα ακόλουθα SlackBuilds θα εγκατασταθούν:"
+msgstr "De volgende SlackBuilds zullen worden geïnstalleerd:"
 
 #: src/spi:206
 msgid "Nothing to install"
-msgstr "Τίποτα προς εγκατάσταση"
+msgstr "Niets te installeren"
 
 #: src/spi:249
 msgid "Updating package cache..."
-msgstr "Ενημέρωση της τοπικής μνήμης πακέτων..."
+msgstr "Pakket cache bijwerken..."
 
 #: src/spi:253
 msgid "Updating SlackBuild cache..."
-msgstr "Ενημέρωση της τοπικής μνήμης SlackBuild..."
+msgstr "SlackBuild cache bijwerken..."
 
 #: src/spi:309
 msgid "USAGE:"
-msgstr "ΧΡΗΣΗ:"
+msgstr "GEBRUIK:"
 
 #: src/spi:309
 msgid "[OPTIONS] [STRING(s)]"
-msgstr "[ΕΠΙΛΟΓΕΣ] [ΛΕΞΗ/ΛΕΞΕΙΣ]"
+msgstr "[OPTIONS] [STRING(s)]"
 
 #: src/spi:311
 msgid "OPTIONS:"
-msgstr "ΕΠΙΛΟΓΕΣ:"
+msgstr "OPTIES:"
 
 #: src/spi:312
 msgid "search for specified packages (default action)"
-msgstr "αναζήτηση πακέτων (εξ ορισμού επιλογή)"
+msgstr "zoek voor gespecificeerde pakketten (standaard actie)"
 
 #: src/spi:313
 msgid "update package and SlackBuild caches"
-msgstr "ενημέρωση της τοπικής μνήμης πακέτων και SlackBuild"
+msgstr "werk caches van pakketten en SlackBuild bij"
 
 #: src/spi:314
 msgid "upgrade packages"
-msgstr "αναβάθμιση πακέτων"
+msgstr "upgrade pakketten"
 
 #: src/spi:315
 msgid "simulate installation of specified packages"
-msgstr "προβολή πακέτων που πρόκειται να εγκατασταθούν"
+msgstr "Simuleer installatie van gespecificeerde pakketten"
 
 #: src/spi:316
 msgid "install specified packages"
-msgstr "εγκατάσταση πακέτων"
+msgstr "installeer gespecificeerde pakketten"
 
 #: src/spi:317
 msgid "disable colour output"
-msgstr "απενεργοποίηση έγχρωμης εξόδου"
+msgstr "zet kleur uit in output"
 
 #: src/spi:318
 msgid "this help message"
-msgstr "το παρόν μήνυμα βοήθειας"
+msgstr "Dit Help bericht"
