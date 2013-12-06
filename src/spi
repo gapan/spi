@@ -20,11 +20,13 @@ initial_env = dict()
 class Colours:
 	RED = '\033[01;31m'
 	GREEN = '\033[01;32m'
+	YELLOW = '\033[01;33m'
 	RESET = '\033[00m'
 
 	def disable(self):
 		self.RED = ''
 		self.GREEN = ''
+		self.YELLOW = ''
 		self.RESET = ''
 
 colour = Colours()
@@ -101,6 +103,9 @@ def string_red(string):
 
 def string_green(string):
 	return colour.GREEN+string+colour.RESET
+
+def string_yellow(string):
+	return colour.YELLOW+string+colour.RESET
 
 # Returns a list with the names of installed packages (names only)
 def pkg_installed():
