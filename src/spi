@@ -31,8 +31,9 @@ colour = Colours()
 def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "nhuUis", ["no-colour",
-			"help", "update", "upgrade" , "install", "search", "simulate"])
+			"help", "update", "upgrade" , "install", "search", "show", "simulate"])
 		
+		do_show = False
 		do_install = False
 		do_simulate = False
 		for opt, arg in opts:
@@ -47,6 +48,8 @@ def main(argv):
 			elif opt in ("-U", "--upgrade"):
 				retval = upgrade()
 				sys.exit(retval)
+			elif opt in ("--show"):
+				do_show = True
 			elif opt in ("-i", "--install"):
 				do_install = True
 			elif opt in ("-s", "--simulate"):
@@ -56,7 +59,9 @@ def main(argv):
 		if not len(args) > 0:
 			usage()
 			sys.exit(0)
-		if do_install:
+		if do_show:
+			show(args)
+		elif do_install:
 			if do_simulate:
 				simulate(args)
 			else:
@@ -79,12 +84,16 @@ def string_red(string):
 def string_green(string):
 	return colour.GREEN+string+colour.RESET
 
+# Returns a list with the names of installed packages (names only)
 def pkg_installed():
 	pkg_installed = []
 	for i in os.listdir('/var/log/packages'):
 		pkg_installed.append(i.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0])
 	return pkg_installed
 
+# Returns a list of packages that match the search criteria (args)
+# Each entry in the list has the following format:
+# [pkgshortname, pkginst, pkgdesc]
 def pkglist(args):
 	cmd = [slaptget, '--search']
 	for arg in args:
@@ -113,6 +122,7 @@ def pkglist(args):
 			pkgs.append([pkgshortname, pkginst, pkgdesc])
 	return pkgs
 
+# Returns a list of SlackBuilds that match the search criteria (args)
 def slackbuildlist(args):
 	cmd = [slaptsrc, '--search']
 	for arg in args:
@@ -167,6 +177,8 @@ def search(args):
 				pkginst = string_red(_('Not installed'))
 			print pkgname+' ['+pkginst+']:', pkgdesc
 
+# Simulates the installation of packages. Provides a list of packages
+# and SlackBuilds that will be installed.
 def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
 	pl = pkglist(args)
 	sl = slackbuildlist(args) 
@@ -207,6 +219,7 @@ def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
 		else:
 			print ""
 
+# Installs the packages/SlackBuilds that are given in args
 def install(args):
 	check_for_root()
 	pl = pkglist(args)
@@ -227,6 +240,7 @@ def install(args):
 				print _('No such package or SlackBuild:')+' '+arg
 				sys.exit(1)
 
+# installs packages, including any dependencies
 def installpkg(pkg):
 	p = subprocess.Popen([slaptget, '--no-prompt', '--install',
 		pkg])
@@ -234,6 +248,7 @@ def installpkg(pkg):
 	if retval != 0:
 		sys.exit(retval)
 
+# installs SlackBuilds. Does not include dependencies.
 def installsb(slackbuild):
 	deps = slaptsrcdeps(slackbuild)
 	if deps != []:
@@ -244,6 +259,7 @@ def installsb(slackbuild):
 	if retval != 0:
 		sys.exit(retval)
 
+# Updates the slapt-get and slapt-src repos
 def update():
 	check_for_root()
 	print _('Updating package cache...')
@@ -255,12 +271,43 @@ def update():
 		retval = p.wait()
 	return retval
 
+# Upgrades the packages with slapt-get
+# No such thing is available for slapt-src
 def upgrade():
 	check_for_root()
 	p = subprocess.Popen([slaptget, '--upgrade'])
 	retval = p.wait()
 	return retval
 
+# Shows information about package/SlackBuild. Essentially runs
+# slapt-get --show or slapt-src --show
+def show(args):
+	pl = pkglist(args)
+	sl = slackbuildlist(args)
+	p = []
+	for i in pl:
+		p.append(i[0])
+	s = []
+	for i in sl:
+		s.append(i[0])
+	for arg in args:
+		if arg in p:
+			process = subprocess.Popen([slaptget, '--show', arg])
+			process.wait()
+		elif arg in s:
+			process = subprocess.Popen([slaptsrc, '--show', arg])
+			process.wait()
+			if arg in pkg_installed():
+				print _("Installed")+"."
+			else:
+				print _("Not installed")+"."
+		else:
+			print _('No such package or SlackBuild:')+' '+arg
+		print
+
+
+# Returns the dependencies of the packages included in pkgs.
+# pkgs is a list of package names.
 def slaptgetdeps(pkgs):
 	deps = []
 	DEVNULL = open('/dev/null', 'w')
@@ -283,6 +330,7 @@ def slaptgetdeps(pkgs):
 	DEVNULL.close()
 	return deps
 
+# Returns the dependencies of a single SlackBuild (pkg)
 def slaptsrcdeps(pkg):
 	deps = []
 	DEVNULL = open('/dev/null', 'w')
@@ -310,6 +358,7 @@ def usage():
 	print
 	print _('OPTIONS:')
 	print '       --search      ',_('search for specified packages (default action)')
+	print '       --show        ',_('show details about package or SlackBuild')
 	print '   -u, --update      ',_('update package and SlackBuild caches')
 	print '   -U, --upgrade     ',_('upgrade packages')
 	print '   -s, --simulate    ',_('simulate installation of specified packages')
