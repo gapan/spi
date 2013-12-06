@@ -302,9 +302,21 @@ def upgrade():
 	retval = p.wait()
 	return retval
 
+def print_header(text, notext=False):
+	line=""
+	if notext:
+		for i in range(0,73):
+			line=line+"-"
+		print string_yellow("+----")+string_yellow(line+"+")
+	else:
+		for i in range(0,71-len(text)):
+			line=line+"-"
+		print string_yellow("+----")+" "+text+" "+string_yellow(line+"+")
+
 # Shows information about package/SlackBuild. Essentially runs
 # slapt-get --show or slapt-src --show
 def show(args):
+	l = len(args)
 	pl = pkglist(args)
 	sl = slackbuildlist(args)
 	p = []
@@ -315,18 +327,29 @@ def show(args):
 		s.append(i[0])
 	for arg in args:
 		if arg in p:
+			if (l>1):
+				print_header(arg)
+				sys.stdout.flush()
 			process = subprocess.Popen([slaptget, '--show', arg])
 			process.wait()
+			if (l>1):
+				print_header(arg, notext=True)
 		elif arg in s:
+			if (l>1):
+				print_header(arg)
+				sys.stdout.flush()
 			process = subprocess.Popen([slaptsrc, '--show', arg])
 			process.wait()
 			if arg in pkg_installed():
 				print _("Installed")+"."
 			else:
 				print _("Not installed")+"."
+			if (l>1):
+				print_header(arg, notext=True)
 		else:
 			print string_red(_('No such package or SlackBuild:'))+' '+arg
 		print
+		sys.stdout.flush()
 
 
 # Returns the dependencies of the packages included in pkgs.
