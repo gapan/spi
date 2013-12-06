@@ -302,6 +302,8 @@ def upgrade():
 	retval = p.wait()
 	return retval
 
+# Just a helper function used in show(args) below. It prints the header
+# and footer, before displaying package/SlackBuild details respectively
 def print_header(text, notext=False):
 	line=""
 	if notext:
