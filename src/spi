@@ -318,6 +318,7 @@ def print_header(text, notext=False):
 # Shows information about package/SlackBuild. Essentially runs
 # slapt-get --show or slapt-src --show
 def show(args):
+	args = set(args)
 	l = len(args)
 	pl = pkglist(args)
 	sl = slackbuildlist(args)
