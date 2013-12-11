@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# jui <appukonrad@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-06 21:19+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"PO-Revision-Date: 2013-12-09 11:20+0000\n"
+"Last-Translator: jui <appukonrad@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/salix/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: src/spi:98
 msgid "This action requires root privileges."
-msgstr ""
+msgstr "Tato akce vyžaduje oprávnění uživatele root."
 
 #: src/spi:178
 msgid "Available packages:"
-msgstr ""
+msgstr "Dostupné balíčky:"
 
 #: src/spi:181 src/spi:193
 msgid "None"
@@ -31,7 +32,7 @@ msgstr "Žádné"
 
 #: src/spi:186 src/spi:198 src/spi:347
 msgid "Installed"
-msgstr ""
+msgstr "Nainstalováno"
 
 #: src/spi:188 src/spi:200 src/spi:349
 msgid "Not installed"
@@ -39,19 +40,19 @@ msgstr "Nenainstalováno"
 
 #: src/spi:190
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "Dostupné SlackBuildy:"
 
 #: src/spi:219 src/spi:263 src/spi:353
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Žádný takový balíček nebo SlackBuild:"
 
 #: src/spi:231
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Budou nainstalovány následující balíčky:"
 
 #: src/spi:237
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "Budou nainstalovány následující SlackBuildy:"
 
 #: src/spi:241
 msgid "Nothing to install"
@@ -59,7 +60,7 @@ msgstr "Nic k nainstalování"
 
 #: src/spi:288
 msgid "Updating package cache..."
-msgstr ""
+msgstr "Aktualizace vyrovnávací paměti pro balíčky..."
 
 #: src/spi:292
 msgid "Updating SlackBuild cache..."
@@ -71,7 +72,7 @@ msgstr "POUŽITÍ:"
 
 #: src/spi:406
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[OPTIONS] [STRING(s)]"
 
 #: src/spi:408
 msgid "OPTIONS:"
@@ -79,31 +80,31 @@ msgstr "MOŽNOSTI:"
 
 #: src/spi:409
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "vyhledat uvedené balíčky (výchozí akce)"
 
 #: src/spi:410
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "zobrazit detaily o balíčku nebo SlackBuildu"
 
 #: src/spi:411
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "aktualizace vyrovnávací paměti balíčků a SlackBuildů"
 
 #: src/spi:412
 msgid "upgrade packages"
-msgstr ""
+msgstr "aktualizace balíčků"
 
 #: src/spi:413
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "simulovat instalaci uvedených balíčků"
 
 #: src/spi:414
 msgid "install specified packages"
-msgstr ""
+msgstr "instalace uvedených balíčků"
 
 #: src/spi:415
 msgid "disable colour output"
-msgstr ""
+msgstr "zakázat obarvení výstupu"
 
 #: src/spi:416
 msgid "this help message"

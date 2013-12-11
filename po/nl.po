@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-06 21:19+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"PO-Revision-Date: 2013-12-07 12:50+0000\n"
+"Last-Translator: Gambit <gambit73@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/salix/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +84,7 @@ msgstr "zoek voor gespecificeerde pakketten (standaard actie)"
 
 #: src/spi:410
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "toon details over het pakket of SlackBuild"
 
 #: src/spi:411
 msgid "update package and SlackBuild caches"
