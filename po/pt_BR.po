@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-06 21:19+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"PO-Revision-Date: 2013-12-15 14:50+0000\n"
+"Last-Translator: Enrico Nicoletto <enrico.BR@gmx.co.uk>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/salix/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: src/spi:98
 msgid "This action requires root privileges."
-msgstr ""
+msgstr "Esta ação requer privilégios de administrador: root."
 
 #: src/spi:178
 msgid "Available packages:"
-msgstr ""
+msgstr "Pacotes disponíveis:"
 
 #: src/spi:181 src/spi:193
 msgid "None"
@@ -31,7 +32,7 @@ msgstr "Nenhum"
 
 #: src/spi:186 src/spi:198 src/spi:347
 msgid "Installed"
-msgstr ""
+msgstr "Instalado"
 
 #: src/spi:188 src/spi:200 src/spi:349
 msgid "Not installed"
@@ -39,19 +40,19 @@ msgstr "Não instalado"
 
 #: src/spi:190
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "SlackBuilds disponíveis:"
 
 #: src/spi:219 src/spi:263 src/spi:353
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Não há pacote ou SlackBuild:"
 
 #: src/spi:231
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Os seguintes pacotes serão instalados:"
 
 #: src/spi:237
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "Os seguintes SlackBuilds serão instalados:"
 
 #: src/spi:241
 msgid "Nothing to install"
@@ -59,7 +60,7 @@ msgstr "Nada para instalar"
 
 #: src/spi:288
 msgid "Updating package cache..."
-msgstr ""
+msgstr "Atualizando cache do pacote..."
 
 #: src/spi:292
 msgid "Updating SlackBuild cache..."
@@ -71,7 +72,7 @@ msgstr "UTILIZAÇÃO:"
 
 #: src/spi:406
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[OPÇÕES] [STRING(s)]"
 
 #: src/spi:408
 msgid "OPTIONS:"
@@ -79,31 +80,31 @@ msgstr "OPÇÕES:"
 
 #: src/spi:409
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "pesquisar por pacotes especificados (ação padrão)"
 
 #: src/spi:410
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "mostrar detalhes sobre pacote ou SlackBuild"
 
 #: src/spi:411
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "atualizar pacote e caches de SlackBuild"
 
 #: src/spi:412
 msgid "upgrade packages"
-msgstr ""
+msgstr "pacotes de aprimoramento"
 
 #: src/spi:413
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "simular instalação de pacotes especificados"
 
 #: src/spi:414
 msgid "install specified packages"
-msgstr ""
+msgstr "Instalar pacotes especificados"
 
 #: src/spi:415
 msgid "disable colour output"
-msgstr ""
+msgstr "desabilitar saída colorida"
 
 #: src/spi:416
 msgid "this help message"

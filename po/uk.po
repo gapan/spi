@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-11 13:10+0000\n"
+"PO-Revision-Date: 2013-12-13 19:30+0000\n"
 "Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/salix/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -44,15 +44,15 @@ msgstr "Доступні SlackBuilds:"
 
 #: src/spi:219 src/spi:263 src/spi:353
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Немає такого пакунку або SlackBuild:"
 
 #: src/spi:231
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "Наступні пакунки буде встановлено:"
 
 #: src/spi:237
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "Наступні SlackBuild-и буде встановлено:"
 
 #: src/spi:241
 msgid "Nothing to install"
@@ -60,7 +60,7 @@ msgstr "Нічого до встановлення"
 
 #: src/spi:288
 msgid "Updating package cache..."
-msgstr ""
+msgstr "Оновлення кешу пакунків..."
 
 #: src/spi:292
 msgid "Updating SlackBuild cache..."
@@ -72,7 +72,7 @@ msgstr "ВИКОРИСТАННЯ:"
 
 #: src/spi:406
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[ПАРАМЕТРИ] [СТРІЧКА(и)]"
 
 #: src/spi:408
 msgid "OPTIONS:"
@@ -80,31 +80,31 @@ msgstr "ОПЦІЇ:"
 
 #: src/spi:409
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "пошук вказаного пакунку (типова дія)"
 
 #: src/spi:410
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "показати деталі про пакунок або "
 
 #: src/spi:411
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "оновлення кешу пакунків і SlackBuild-ів"
 
 #: src/spi:412
 msgid "upgrade packages"
-msgstr ""
+msgstr "оновлення пакунків"
 
 #: src/spi:413
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "симуляція встановлення вказаних пакунків"
 
 #: src/spi:414
 msgid "install specified packages"
-msgstr ""
+msgstr "встановлення вказаних пакунків"
 
 #: src/spi:415
 msgid "disable colour output"
-msgstr ""
+msgstr "вимкнути вивід в кольорі"
 
 #: src/spi:416
 msgid "this help message"
