@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-06 21:19+0000\n"
+"POT-Creation-Date: 2014-01-02 15:51+0200\n"
+"PO-Revision-Date: 2014-01-02 13:50+0000\n"
 "Last-Translator: gapan <vlahavas@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/salix/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -17,94 +17,98 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: src/spi:98
+#: src/spi:102
 msgid "This action requires root privileges."
 msgstr ""
 
-#: src/spi:178
+#: src/spi:182
 msgid "Available packages:"
 msgstr ""
 
-#: src/spi:181 src/spi:193
+#: src/spi:185 src/spi:197
 msgid "None"
 msgstr "لا شيء"
 
-#: src/spi:186 src/spi:198 src/spi:347
+#: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
 msgstr ""
 
-#: src/spi:188 src/spi:200 src/spi:349
+#: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
 msgstr "غير مثبت"
 
-#: src/spi:190
+#: src/spi:194
 msgid "Available SlackBuilds:"
 msgstr ""
 
-#: src/spi:219 src/spi:263 src/spi:353
+#: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
 msgstr ""
 
-#: src/spi:231
+#: src/spi:235
 msgid "The following packages will be installed:"
 msgstr ""
 
-#: src/spi:237
+#: src/spi:241
 msgid "The following SlackBuilds will be installed:"
 msgstr ""
 
-#: src/spi:241
+#: src/spi:245
 msgid "Nothing to install"
 msgstr "لا توجد عناصر لإزالة تثبيتها"
 
-#: src/spi:288
+#: src/spi:302
 msgid "Updating package cache..."
 msgstr ""
 
-#: src/spi:292
+#: src/spi:306
 msgid "Updating SlackBuild cache..."
 msgstr "تحديث SlackBuild cache..."
 
-#: src/spi:406
+#: src/spi:420
 msgid "USAGE:"
 msgstr "الاستخدام:"
 
-#: src/spi:406
+#: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
 msgstr ""
 
-#: src/spi:408
+#: src/spi:422
 msgid "OPTIONS:"
 msgstr "خيارات:"
 
-#: src/spi:409
+#: src/spi:423
 msgid "search for specified packages (default action)"
 msgstr ""
 
-#: src/spi:410
+#: src/spi:424
 msgid "show details about package or SlackBuild"
 msgstr ""
 
-#: src/spi:411
+#: src/spi:425
+msgid "purge package and SlackBuild caches"
+msgstr ""
+
+#: src/spi:426
 msgid "update package and SlackBuild caches"
 msgstr ""
 
-#: src/spi:412
+#: src/spi:427
 msgid "upgrade packages"
 msgstr ""
 
-#: src/spi:413
-msgid "simulate installation of specified packages"
-msgstr ""
-
-#: src/spi:414
+#: src/spi:428
 msgid "install specified packages"
 msgstr ""
 
-#: src/spi:415
+#: src/spi:429
+msgid "simulate installation of specified packages"
+msgstr ""
+
+#: src/spi:430
 msgid "disable colour output"
 msgstr ""
 
-#: src/spi:416
+#: src/spi:431
 msgid "this help message"
 msgstr "رسالة التعليمات هذه"

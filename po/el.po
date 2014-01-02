@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# gapan <vlahavas@gmail.com>, 2013
+# gapan <vlahavas@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-06 21:30+0000\n"
+"POT-Creation-Date: 2014-01-02 15:51+0200\n"
+"PO-Revision-Date: 2014-01-02 14:28+0000\n"
 "Last-Translator: gapan <vlahavas@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/salix/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -18,94 +18,98 @@ msgstr ""
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/spi:98
+#: src/spi:102
 msgid "This action requires root privileges."
 msgstr "Η επιλογή αυτή απαιτεί δικαιώματα υπερχρήστη."
 
-#: src/spi:178
+#: src/spi:182
 msgid "Available packages:"
 msgstr "Διαθέσιμα πακέτα:"
 
-#: src/spi:181 src/spi:193
+#: src/spi:185 src/spi:197
 msgid "None"
 msgstr "Κανένα"
 
-#: src/spi:186 src/spi:198 src/spi:347
+#: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
 msgstr "Εγκατεστημένο"
 
-#: src/spi:188 src/spi:200 src/spi:349
+#: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
 msgstr "Μη εγκατεστημένο"
 
-#: src/spi:190
+#: src/spi:194
 msgid "Available SlackBuilds:"
 msgstr "Διαθέσιμα SlackBuilds:"
 
-#: src/spi:219 src/spi:263 src/spi:353
+#: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
 msgstr "Δεν υπάρχει πακέτο ή SlackBuild με αυτό το όνομα:"
 
-#: src/spi:231
+#: src/spi:235
 msgid "The following packages will be installed:"
 msgstr "Τα ακόλουθα πακέτα θα εγκατασταθούν:"
 
-#: src/spi:237
+#: src/spi:241
 msgid "The following SlackBuilds will be installed:"
 msgstr "Τα ακόλουθα SlackBuilds θα εγκατασταθούν:"
 
-#: src/spi:241
+#: src/spi:245
 msgid "Nothing to install"
 msgstr "Τίποτα προς εγκατάσταση"
 
-#: src/spi:288
+#: src/spi:302
 msgid "Updating package cache..."
 msgstr "Ενημέρωση της τοπικής μνήμης πακέτων..."
 
-#: src/spi:292
+#: src/spi:306
 msgid "Updating SlackBuild cache..."
 msgstr "Ενημέρωση της τοπικής μνήμης SlackBuild..."
 
-#: src/spi:406
+#: src/spi:420
 msgid "USAGE:"
 msgstr "ΧΡΗΣΗ:"
 
-#: src/spi:406
+#: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
 msgstr "[ΕΠΙΛΟΓΕΣ] [ΛΕΞΗ/ΛΕΞΕΙΣ]"
 
-#: src/spi:408
+#: src/spi:422
 msgid "OPTIONS:"
 msgstr "ΕΠΙΛΟΓΕΣ:"
 
-#: src/spi:409
+#: src/spi:423
 msgid "search for specified packages (default action)"
 msgstr "αναζήτηση πακέτων (εξ ορισμού επιλογή)"
 
-#: src/spi:410
+#: src/spi:424
 msgid "show details about package or SlackBuild"
 msgstr "εμφάνιση λεπτομερειών για το πακέτο ή το SlackBuild"
 
-#: src/spi:411
+#: src/spi:425
+msgid "purge package and SlackBuild caches"
+msgstr "εκκαθάριση των τοπικών αρχείων πακέτων και SlackBuild"
+
+#: src/spi:426
 msgid "update package and SlackBuild caches"
 msgstr "ενημέρωση της τοπικής μνήμης πακέτων και SlackBuild"
 
-#: src/spi:412
+#: src/spi:427
 msgid "upgrade packages"
 msgstr "αναβάθμιση πακέτων"
 
-#: src/spi:413
-msgid "simulate installation of specified packages"
-msgstr "προβολή πακέτων που πρόκειται να εγκατασταθούν"
-
-#: src/spi:414
+#: src/spi:428
 msgid "install specified packages"
 msgstr "εγκατάσταση πακέτων"
 
-#: src/spi:415
+#: src/spi:429
+msgid "simulate installation of specified packages"
+msgstr "προβολή πακέτων που πρόκειται να εγκατασταθούν"
+
+#: src/spi:430
 msgid "disable colour output"
 msgstr "απενεργοποίηση έγχρωμης εξόδου"
 
-#: src/spi:416
+#: src/spi:431
 msgid "this help message"
 msgstr "το παρόν μήνυμα βοήθειας"

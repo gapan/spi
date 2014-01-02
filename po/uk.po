@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013
+# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 23:20+0200\n"
-"PO-Revision-Date: 2013-12-13 19:30+0000\n"
+"POT-Creation-Date: 2014-01-02 15:51+0200\n"
+"PO-Revision-Date: 2014-01-02 14:10+0000\n"
 "Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/salix/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -18,94 +18,98 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/spi:98
+#: src/spi:102
 msgid "This action requires root privileges."
 msgstr "Ця дія вимагає прав суперкористувача."
 
-#: src/spi:178
+#: src/spi:182
 msgid "Available packages:"
 msgstr "Доступні пакунки:"
 
-#: src/spi:181 src/spi:193
+#: src/spi:185 src/spi:197
 msgid "None"
-msgstr "Нема"
+msgstr "Жодного"
 
-#: src/spi:186 src/spi:198 src/spi:347
+#: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
 msgstr "Встановлені"
 
-#: src/spi:188 src/spi:200 src/spi:349
+#: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
 msgstr "Не встановлено"
 
-#: src/spi:190
+#: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr "Доступні SlackBuilds:"
+msgstr "Доступні SlackBuild'и:"
 
-#: src/spi:219 src/spi:263 src/spi:353
+#: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr "Немає такого пакунку або SlackBuild:"
+msgstr "Немає такого пакунку або SlackBuild'у:"
 
-#: src/spi:231
+#: src/spi:235
 msgid "The following packages will be installed:"
 msgstr "Наступні пакунки буде встановлено:"
 
-#: src/spi:237
-msgid "The following SlackBuilds will be installed:"
-msgstr "Наступні SlackBuild-и буде встановлено:"
-
 #: src/spi:241
+msgid "The following SlackBuilds will be installed:"
+msgstr "Наступні SlackBuild'и буде встановлено:"
+
+#: src/spi:245
 msgid "Nothing to install"
 msgstr "Нічого до встановлення"
 
-#: src/spi:288
+#: src/spi:302
 msgid "Updating package cache..."
 msgstr "Оновлення кешу пакунків..."
 
-#: src/spi:292
+#: src/spi:306
 msgid "Updating SlackBuild cache..."
-msgstr "Оновлення SlackBuild кешу ..."
+msgstr "Оновлення кешу SlackBuild'ів ..."
 
-#: src/spi:406
+#: src/spi:420
 msgid "USAGE:"
 msgstr "ВИКОРИСТАННЯ:"
 
-#: src/spi:406
+#: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
 msgstr "[ПАРАМЕТРИ] [СТРІЧКА(и)]"
 
-#: src/spi:408
+#: src/spi:422
 msgid "OPTIONS:"
 msgstr "ОПЦІЇ:"
 
-#: src/spi:409
+#: src/spi:423
 msgid "search for specified packages (default action)"
 msgstr "пошук вказаного пакунку (типова дія)"
 
-#: src/spi:410
+#: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr "показати деталі про пакунок або "
+msgstr "показати деталі про пакунок або SlackBuild"
 
-#: src/spi:411
+#: src/spi:425
+msgid "purge package and SlackBuild caches"
+msgstr "очистити кеш пакунків і SlackBuild'ів"
+
+#: src/spi:426
 msgid "update package and SlackBuild caches"
 msgstr "оновлення кешу пакунків і SlackBuild-ів"
 
-#: src/spi:412
+#: src/spi:427
 msgid "upgrade packages"
 msgstr "оновлення пакунків"
 
-#: src/spi:413
-msgid "simulate installation of specified packages"
-msgstr "симуляція встановлення вказаних пакунків"
-
-#: src/spi:414
+#: src/spi:428
 msgid "install specified packages"
 msgstr "встановлення вказаних пакунків"
 
-#: src/spi:415
+#: src/spi:429
+msgid "simulate installation of specified packages"
+msgstr "симуляція встановлення вказаних пакунків"
+
+#: src/spi:430
 msgid "disable colour output"
 msgstr "вимкнути вивід в кольорі"
 
-#: src/spi:416
+#: src/spi:431
 msgid "this help message"
 msgstr "це повідомлення допомоги"
