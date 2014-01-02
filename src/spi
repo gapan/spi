@@ -51,7 +51,8 @@ set_output_encoding()
 def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "nhuUis", ["no-colour",
-			"help", "update", "upgrade" , "install", "search", "show", "simulate"])
+			"help", "update", "upgrade" , "install", "search", "show",
+			"simulate", "clean"])
 		
 		do_show = False
 		do_install = False
@@ -74,6 +75,9 @@ def main(argv):
 				do_install = True
 			elif opt in ("-s", "--simulate"):
 				do_simulate = True
+			elif opt in ("--clean"):
+				retval = clean()
+				sys.exit(retval)
 			elif opt in ("--search"):
 				pass
 		if not len(args) > 0:
@@ -282,6 +286,16 @@ def installsb(slackbuild):
 	if retval != 0:
 		sys.exit(retval)
 
+# Cleans up the slapt-get and slapt-src caches
+def clean():
+	check_for_root()
+	p = subprocess.Popen([slaptget, '--clean'])
+	retval = p.wait()
+	if retval == 0:
+		p = subprocess.Popen([slaptsrc, '--clean'])
+		retval = p.wait()
+	return retval
+
 # Updates the slapt-get and slapt-src repos
 def update():
 	check_for_root()
@@ -408,10 +422,11 @@ def usage():
 	print _('OPTIONS:')
 	print '       --search      ',_('search for specified packages (default action)')
 	print '       --show        ',_('show details about package or SlackBuild')
+	print '       --clean       ',_('purge package and SlackBuild caches')
 	print '   -u, --update      ',_('update package and SlackBuild caches')
 	print '   -U, --upgrade     ',_('upgrade packages')
-	print '   -s, --simulate    ',_('simulate installation of specified packages')
 	print '   -i, --install     ',_('install specified packages')
+	print '   -s, --simulate    ',_('simulate installation of specified packages')
 	print '   -n, --no-colour   ',_('disable colour output')
 	print '   -h, --help        ',_('this help message')
 
