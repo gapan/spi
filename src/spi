@@ -69,16 +69,16 @@ def main(argv):
 			elif opt in ("-U", "--upgrade"):
 				retval = upgrade()
 				sys.exit(retval)
-			elif opt in ("--show"):
+			elif opt in ("--show",):
 				do_show = True
 			elif opt in ("-i", "--install"):
 				do_install = True
 			elif opt in ("-s", "--simulate"):
 				do_simulate = True
-			elif opt in ("--clean"):
+			elif opt in ("--clean",):
 				retval = clean()
 				sys.exit(retval)
-			elif opt in ("--search"):
+			elif opt in ("--search",):
 				pass
 		if not len(args) > 0:
 			usage()
