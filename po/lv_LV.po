@@ -3,113 +3,113 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013-2014
+# Gatis Kalniņš <>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-01-08 14:00+0000\n"
-"Last-Translator: Enrico Nicoletto <enrico.BR@gmx.co.uk>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/salix/language/pt_BR/)\n"
+"PO-Revision-Date: 2014-01-29 20:30+0000\n"
+"Last-Translator: Gatis Kalniņš <>\n"
+"Language-Team: Latvian (Latvia) (http://www.transifex.com/projects/p/salix/language/lv_LV/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: lv_LV\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
 #: src/spi:102
 msgid "This action requires root privileges."
-msgstr "Esta ação requer privilégios de administrador: root."
+msgstr "Šai darbībai nepieciešamas root privilēgijas."
 
 #: src/spi:182
 msgid "Available packages:"
-msgstr "Pacotes disponíveis:"
+msgstr "Pieejamas pakotnes:"
 
 #: src/spi:185 src/spi:197
 msgid "None"
-msgstr "Nenhum"
+msgstr "Neviena"
 
 #: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
-msgstr "Instalado"
+msgstr "Instalētas"
 
 #: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
-msgstr "Não instalado"
+msgstr "Nav instalēta"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr "SlackBuilds disponíveis:"
+msgstr "Pieejamie SlackBuilds faili:"
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr "Não há pacote ou SlackBuild:"
+msgstr "Nav atrastas pakotnes vai SlackBuild:"
 
 #: src/spi:235
 msgid "The following packages will be installed:"
-msgstr "Os seguintes pacotes serão instalados:"
+msgstr "Tiks instalētas sekojošas pakotnes:"
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr "Os seguintes SlackBuilds serão instalados:"
+msgstr "Tiks instalēti sekojoši SlackBuilds:"
 
 #: src/spi:245
 msgid "Nothing to install"
-msgstr "Nada para instalar"
+msgstr "Nekas netiks instalēts"
 
 #: src/spi:302
 msgid "Updating package cache..."
-msgstr "Atualizando cache do pacote..."
+msgstr "Jaunina pakotņu buferi..."
 
 #: src/spi:306
 msgid "Updating SlackBuild cache..."
-msgstr "Atualizando o cache do Slackbuild."
+msgstr "Jaunina SlackBuild buferi..."
 
 #: src/spi:420
 msgid "USAGE:"
-msgstr "UTILIZAÇÃO:"
+msgstr "PIELIETOJUMS:"
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr "[OPÇÕES] [STRING(s)]"
+msgstr "[OPCIJAS] [TEKSTS(i)]"
 
 #: src/spi:422
 msgid "OPTIONS:"
-msgstr "OPÇÕES:"
+msgstr "OPCIJAS:"
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr "pesquisar por pacotes especificados (ação padrão)"
+msgstr "meklēt norādītās pakotnes (pēc noklusējuma)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr "mostrar detalhes sobre pacote ou SlackBuild"
+msgstr "rāda informāciju par pakotni vai SlackBuild"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr "excluir permanentemente o pacote e caches do SlackBuild"
+msgstr "dzēš pakotņu un SlackBuild buferi"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr "atualizar pacote e caches de SlackBuild"
+msgstr "jaunina pakotņu un SlackBuild buferi"
 
 #: src/spi:427
 msgid "upgrade packages"
-msgstr "pacotes de aprimoramento"
+msgstr "jaunina pakotnes"
 
 #: src/spi:428
 msgid "install specified packages"
-msgstr "Instalar pacotes especificados"
+msgstr "instalē norādītās pakotnes"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr "simular instalação de pacotes especificados"
+msgstr "simulē norādīto pakotņu instalācijas procesu"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr "desabilitar saída colorida"
+msgstr "izslēdz krāsainu izvadi"
 
 #: src/spi:431
 msgid "this help message"
-msgstr "Esta mensagem de ajuda"
+msgstr "šis palīdzības paziņojums"
