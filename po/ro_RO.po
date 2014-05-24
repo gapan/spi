@@ -3,113 +3,113 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# hidd <chiffon21@live.fr>, 2014
+# ArianServ <arianserv@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-05-23 21:51+0000\n"
-"Last-Translator: hidd <chiffon21@live.fr>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/salix/language/fr/)\n"
+"PO-Revision-Date: 2014-04-09 14:10+0000\n"
+"Last-Translator: ArianServ <arianserv@gmail.com>\n"
+"Language-Team: Romanian (Romania) (http://www.transifex.com/projects/p/salix/language/ro_RO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ro_RO\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #: src/spi:102
 msgid "This action requires root privileges."
-msgstr ""
+msgstr "Această acţiune necesită privilegii root."
 
 #: src/spi:182
 msgid "Available packages:"
-msgstr "Paquets disponibles :"
+msgstr "Pachete disponibile:"
 
 #: src/spi:185 src/spi:197
 msgid "None"
-msgstr "Aucun"
+msgstr "Nimic"
 
 #: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
-msgstr "Installé"
+msgstr "Instalate"
 
 #: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
-msgstr "Non installé"
+msgstr "Neinstalate"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "SlackBuilds disponibile:"
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Nici-un asemenea pachet sau SlackBuild:"
 
 #: src/spi:235
 msgid "The following packages will be installed:"
-msgstr "Les paquets suivants seront installés :"
+msgstr "Următoarele pachete vor fi instalate:"
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "Următoarele SlackBuilds vor fi instalate:"
 
 #: src/spi:245
 msgid "Nothing to install"
-msgstr "Rien à installer"
+msgstr "Nimic de instalat"
 
 #: src/spi:302
 msgid "Updating package cache..."
-msgstr "Mise à jour du cache des paquets..."
+msgstr "Actualizare cache pachet..."
 
 #: src/spi:306
 msgid "Updating SlackBuild cache..."
-msgstr "Mise à jour du cache des SlackBuilds…"
+msgstr "Actualizare cache SlackBuild..."
 
 #: src/spi:420
 msgid "USAGE:"
-msgstr "UTILISATION :"
+msgstr "UTILIZARE:"
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[OPTIONS] [STRING(s)]"
 
 #: src/spi:422
 msgid "OPTIONS:"
-msgstr "OPTIONS :"
+msgstr "OPŢIUNI:"
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "caută pachetele specificate (acşiune implicită)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "afişare detalii despre pachete sau SlackBuild"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr ""
+msgstr "golire cache pachete şi SlackBuild"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "actualizare cache pachete şi SlackBuild"
 
 #: src/spi:427
 msgid "upgrade packages"
-msgstr ""
+msgstr "actualizare pachete"
 
 #: src/spi:428
 msgid "install specified packages"
-msgstr ""
+msgstr "instalare pachete specificate"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "simulare instalare pachete specificate"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr ""
+msgstr "dezactivare ieşire culoare"
 
 #: src/spi:431
 msgid "this help message"
-msgstr "ce message d'aide"
+msgstr "acest mesaj de ajutor"
