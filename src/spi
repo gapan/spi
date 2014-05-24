@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PYTHONIOENCODING=utf-8
+
+/usr/libexec/spi.py "$@"
