@@ -27,7 +27,7 @@ clean:
 
 install:
 	install -Dm 755 src/spi $(DESTDIR)/$(PREFIX)/bin/spi
-	install -Dm 755 src/spi $(DESTDIR)/usr/libexec/spi.py
+	install -Dm 755 src/spi.py $(DESTDIR)/usr/libexec/spi.py
 	for i in `ls po/*.po | sed 's/.po//' | xargs -n1 basename` ;do \
 		if [ ! -d $(DESTDIR)$(PACKAGE_LOCALE_DIR)/$$i/LC_MESSAGES ]; then \
 			mkdir -p $(DESTDIR)$(PACKAGE_LOCALE_DIR)/$$i/LC_MESSAGES; \
