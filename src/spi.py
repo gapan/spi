@@ -232,13 +232,13 @@ def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
 		pqueue = sorted(slaptgetdeps(pqueue))
 		squeue = sorted(squeue)
 		if pqueue != []:
-			print _('The following packages will be installed:'+'\n  '),
+			print _('The following packages will be installed:')+'\n  ',
 			for i in pqueue:
 				print i,
 		if squeue != []:
 			if pqueue != []:
 				print "\n"
-			print _('The following SlackBuilds will be installed:'+'\n  '),
+			print _('The following SlackBuilds will be installed:')+'\n  ',
 			for i in squeue:
 				print i,
 		if ((pqueue == []) and (squeue == [])):
