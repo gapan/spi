@@ -5,6 +5,7 @@ import getopt
 import sys
 import os
 import subprocess
+import urllib2
 
 # Internationalization
 import locale
@@ -13,6 +14,7 @@ gettext.install("spi", "/usr/share/locale", unicode=1)
 
 slaptget = '/usr/sbin/slapt-get'
 slaptsrc = '/usr/bin/slapt-src'
+slackbuilds_data = '/usr/src/slapt-src/slackbuilds_data'
 
 # create a copy of the default environment
 initial_env = dict()
@@ -361,6 +363,51 @@ def show(args):
 				print _("Installed")+"."
 			else:
 				print _("Not installed")+"."
+			
+			# Now show the README if it's there
+			#
+			# just to be on the safe side
+			sourceurl = None
+			location = None
+			files = None
+			
+			data = ''
+			f = open(slackbuilds_data)
+			done = False
+			found = False
+			while not done:
+				line = f.readline()
+				if line == 'SLACKBUILD NAME: '+arg+'\n':
+					found = True
+				if found is True:
+					if line.startswith('SLACKBUILD'):
+						data = ''.join([data, line])
+					else:
+						done = True
+			f.close()
+			pkginfo = data.splitlines()
+			for i in pkginfo:
+				if 'SLACKBUILD SOURCEURL: ' in i:
+					sourceurl = i.partition('SOURCEURL: ')[2]
+				elif 'SLACKBUILD LOCATION: ' in i:
+					location = i.partition('LOCATION: ')[2]
+				elif 'SLACKBUILD FILES: ' in i:
+					files = i.partition('FILES: ')[2].rsplit(' ')
+			if 'README' in files:
+				try:
+					# setting a timeout of 5 seconds. We don't want this to
+					# take too long
+					f = urllib2.urlopen(sourceurl+location+'README', None, 5)
+					readme = f.read().splitlines()
+					print "\nREADME:"
+					for line in readme:
+						try:
+							print line.decode('utf8')
+						except UnicodeDecodeError:
+							print line.decode('latin1')
+				except (urllib2.HTTPError, urllib2.URLError):
+					pass
+			# done, print the footer
 			if (l>1):
 				print_header(arg, notext=True)
 		else:
