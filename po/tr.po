@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# salix <sal.senturk@gmail.com>, 2014
+# Ege Öz <ege.oz@yandex.com.tr>, 2014
+# Salih <sal.senturk@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-04-08 20:50+0000\n"
-"Last-Translator: salix <sal.senturk@gmail.com>\n"
+"PO-Revision-Date: 2014-08-01 14:11+0000\n"
+"Last-Translator: Ege Öz <ege.oz@yandex.com.tr>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/salix/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,11 +41,11 @@ msgstr "Kurulamadı"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "Mevcut SlackBuild'ler:"
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Paket ya da SlackBuild yok:"
 
 #: src/spi:235
 msgid "The following packages will be installed:"
@@ -52,7 +53,7 @@ msgstr "Aşağıdaki paketler kurulacaktır:"
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "Bu SlackBuild'ler yüklenecek:"
 
 #: src/spi:245
 msgid "Nothing to install"
@@ -72,7 +73,7 @@ msgstr "KULLANIM:"
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[SEÇENEKLER] [STRING(s)]"
 
 #: src/spi:422
 msgid "OPTIONS:"
@@ -80,19 +81,19 @@ msgstr "SEÇENEKLER:"
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "bir paketi ara (varsayılan)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "SlackBuild ya da paket hakkında detayları göster"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr ""
+msgstr "SlackBuild ve paket önbelleğini temizler"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "SlackBuild ve paket önbelleğini güncelle"
 
 #: src/spi:427
 msgid "upgrade packages"
@@ -104,11 +105,11 @@ msgstr "seçilen paketleri kur"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "bir paketin yüklenmesini simule et"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr ""
+msgstr "renkli çıktyı devre dışı bırak"
 
 #: src/spi:431
 msgid "this help message"
