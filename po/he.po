@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# GenghisKhan <genghiskhan@gmx.ca>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-12-27 06:00+0000\n"
-"Last-Translator: GenghisKhan <genghiskhan@gmx.ca>\n"
+"PO-Revision-Date: 2014-01-02 13:50+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/salix/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +35,7 @@ msgstr ""
 
 #: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
-msgstr "Not installed"
+msgstr "חבילה שאינה מותקנת"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
@@ -56,7 +55,7 @@ msgstr ""
 
 #: src/spi:245
 msgid "Nothing to install"
-msgstr "Nothing to install"
+msgstr "אין מה להתקין"
 
 #: src/spi:302
 msgid "Updating package cache..."
@@ -64,7 +63,7 @@ msgstr ""
 
 #: src/spi:306
 msgid "Updating SlackBuild cache..."
-msgstr "Updating SlackBuild cache..."
+msgstr "מעדכן כעת מטמון ‫SlackBuild..."
 
 #: src/spi:420
 msgid "USAGE:"
