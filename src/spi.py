@@ -6,6 +6,7 @@ import sys
 import os
 import subprocess
 import urllib2
+import re
 
 # Internationalization
 import locale
@@ -181,6 +182,9 @@ def slackbuildlist(args):
 	return pkgs
 
 def search(args):
+	# strip "lib" prefixes and suffixes in names, so when searching for
+	# "libfoo" or "foolib" results for "foo" are shown
+	args = striplib(args)
 	print _('Available packages:')
 	pl = pkglist(args)
 	if pl == []:
@@ -330,6 +334,19 @@ def print_header(text, notext=False):
 		for i in range(0,71-len(text)):
 			line=line+"-"
 		print string_yellow("+----")+" "+text+" "+string_yellow(line+"+")
+
+# a helper function that strips "lib" from the start and end of strings
+# in lists. Replaces the "lib" part only if the string has some other
+# chars in it.
+def striplib(l):
+	new = []
+	for i in l:
+		n = re.sub('^lib-(.)', r'\1', i)
+		n = re.sub('(.)-lib$', r'\1', n)
+		n = re.sub('^lib(.)', r'\1', n)
+		n = re.sub('(.)lib$', r'\1', n)
+		new.append(n)
+	return new
 
 # Shows information about package/SlackBuild. Essentially runs
 # slapt-get --show or slapt-src --show
