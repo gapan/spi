@@ -481,7 +481,7 @@ def slaptsrcdeps(pkg):
 	return deps
 
 def usage():
-	print _('USAGE:'), os.path.basename(sys.argv[0]),_('[OPTIONS] [STRING(s)]')
+	print _('USAGE:'), 'spi',_('[OPTIONS] [STRING(s)]')
 	print
 	print _('OPTIONS:')
 	print '       --search      ',_('search for specified packages (default action)')
