@@ -2,6 +2,7 @@
 # vim:et:sta:sts=4:sw=4:ts=8:tw=79:
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import getopt
 import sys
 import os
@@ -103,7 +104,7 @@ def main(argv):
 
 def check_for_root():
     if os.geteuid() != 0:
-        print _('This action requires root privileges.')
+        print(_('This action requires root privileges.'))
         sys.exit(1)
 
 def string_red(string):
@@ -186,10 +187,10 @@ def search(args):
     # strip "lib" prefixes and suffixes in names, so when searching for
     # "libfoo" or "foolib" results for "foo" are shown
     args = striplib(args)
-    print _('Available packages:')
+    print(_('Available packages:'))
     pl = pkglist(args)
     if pl == []:
-        print _('None')
+        print(_('None'))
     else:
         for i in pl:
             pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
@@ -197,11 +198,11 @@ def search(args):
                 pkginst = string_green(_('Installed'))
             else:
                 pkginst = string_red(_('Not installed'))
-            print pkgname+' ['+pkginst+']:', pkgdesc
-    print "\n"+_('Available SlackBuilds:')
+            print(pkgname+' ['+pkginst+']:', pkgdesc)
+    print("\n"+_('Available SlackBuilds:'))
     sl = slackbuildlist(args)
     if sl == []:
-        print _('None')
+        print(_('None'))
     else:
         for i in sl:
             pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
@@ -209,7 +210,7 @@ def search(args):
                 pkginst = string_green(_('Installed'))
             else:
                 pkginst = string_red(_('Not installed'))
-            print pkgname+' ['+pkginst+']:', pkgdesc
+            print(pkgname+' ['+pkginst+']:', pkgdesc)
 
 # Simulates the installation of packages. Provides a list of packages
 # and SlackBuilds that will be installed.
@@ -227,7 +228,7 @@ def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
         installed = pkg_installed()
     for arg in args:
         if arg not in both:
-            print string_red(_('No such package or SlackBuild:'))+' '+arg
+            print(string_red(_('No such package or SlackBuild:'))+' '+arg)
             sys.exit(1)
         if ((arg not in installed) and (arg not in pqueue) and (arg not in squeue)):
             if arg in p:
@@ -239,19 +240,19 @@ def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
         pqueue = sorted(slaptgetdeps(pqueue))
         squeue = sorted(squeue)
         if pqueue != []:
-            print _('The following packages will be installed:')+'\n  ',
+            print(_('The following packages will be installed:')+'\n  ', end=' ')
             for i in pqueue:
-                print i,
+                print(i, end=' ')
         if squeue != []:
             if pqueue != []:
-                print "\n"
-            print _('The following SlackBuilds will be installed:')+'\n  ',
+                print("\n")
+            print(_('The following SlackBuilds will be installed:')+'\n  ', end=' ')
             for i in squeue:
-                print i,
+                print(i, end=' ')
         if ((pqueue == []) and (squeue == [])):
-            print _('Nothing to install')
+            print(_('Nothing to install'))
         else:
-            print ""
+            print()
 
 # Installs the packages/SlackBuilds that are given in args
 def install(args):
@@ -271,7 +272,7 @@ def install(args):
             elif arg in s:
                 installsb(arg)
             else:
-                print string_red(_('No such package or SlackBuild:'))+' '+arg
+                print(string_red(_('No such package or SlackBuild:'))+' '+arg)
                 sys.exit(1)
 
 # installs packages, including any dependencies
@@ -306,11 +307,11 @@ def clean():
 # Updates the slapt-get and slapt-src repos
 def update():
     check_for_root()
-    print _('Updating package cache...')
+    print(_('Updating package cache...'))
     p = subprocess.Popen([slaptget, '--update'])
     retval = p.wait()
     if retval == 0:
-        print "\n"+_('Updating SlackBuild cache...')
+        print("\n"+_('Updating SlackBuild cache...'))
         p = subprocess.Popen([slaptsrc, '--update'])
         retval = p.wait()
     return retval
@@ -330,11 +331,11 @@ def print_header(text, notext=False):
     if notext:
         for i in range(0,73):
             line=line+"-"
-        print string_yellow("+----")+string_yellow(line+"+")
+        print(string_yellow("+----")+string_yellow(line+"+"))
     else:
         for i in range(0,71-len(text)):
             line=line+"-"
-        print string_yellow("+----")+" "+text+" "+string_yellow(line+"+")
+        print(string_yellow("+----")+" "+text+" "+string_yellow(line+"+"))
 
 # a helper function that strips "lib" from the start and end of strings
 # in lists. Replaces the "lib" part only if the string has some other
@@ -378,9 +379,9 @@ def show(args):
             process = subprocess.Popen([slaptsrc, '--show', arg])
             process.wait()
             if arg in pkg_installed():
-                print _("Installed")+"."
+                print(_("Installed")+".")
             else:
-                print _("Not installed")+"."
+                print(_("Not installed")+".")
             
             # Now show the README if it's there
             #
@@ -417,20 +418,20 @@ def show(args):
                     # take too long
                     f = urllib2.urlopen(sourceurl+location+'README', None, 5)
                     readme = f.read().splitlines()
-                    print "\nREADME:"
+                    print("\nREADME:")
                     for line in readme:
                         try:
-                            print line.decode('utf8')
+                            print(line.decode('utf8'))
                         except UnicodeDecodeError:
-                            print line.decode('latin1')
+                            print(line.decode('latin1'))
                 except (urllib2.HTTPError, urllib2.URLError):
                     pass
             # done, print the footer
             if (l>1):
                 print_header(arg, notext=True)
         else:
-            print string_red(_('No such package or SlackBuild:'))+' '+arg
-        print
+            print(string_red(_('No such package or SlackBuild:'))+' '+arg)
+        print()
         sys.stdout.flush()
 
 
@@ -482,18 +483,18 @@ def slaptsrcdeps(pkg):
     return deps
 
 def usage():
-    print _('USAGE:'), 'spi',_('[OPTIONS] [STRING(s)]')
-    print
-    print _('OPTIONS:')
-    print '       --search      ',_('search for specified packages (default action)')
-    print '       --show        ',_('show details about package or SlackBuild')
-    print '       --clean       ',_('purge package and SlackBuild caches')
-    print '   -u, --update      ',_('update package and SlackBuild caches')
-    print '   -U, --upgrade     ',_('upgrade packages')
-    print '   -i, --install     ',_('install specified packages')
-    print '   -s, --simulate    ',_('simulate installation of specified packages')
-    print '   -n, --no-colour   ',_('disable colour output')
-    print '   -h, --help        ',_('this help message')
+    print(_('USAGE:'), 'spi',_('[OPTIONS] [STRING(s)]'))
+    print()
+    print(_('OPTIONS:'))
+    print('       --search      ',_('search for specified packages (default action)'))
+    print('       --show        ',_('show details about package or SlackBuild'))
+    print('       --clean       ',_('purge package and SlackBuild caches'))
+    print('   -u, --update      ',_('update package and SlackBuild caches'))
+    print('   -U, --upgrade     ',_('upgrade packages'))
+    print('   -i, --install     ',_('install specified packages'))
+    print('   -s, --simulate    ',_('simulate installation of specified packages'))
+    print('   -n, --no-colour   ',_('disable colour output'))
+    print('   -h, --help        ',_('this help message'))
 
 
 if __name__ == "__main__":
