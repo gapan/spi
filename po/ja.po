@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# tsuren <hydrangea_and_snail@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-01-02 13:50+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
-"Language-Team: Japanese (http://www.transifex.com/projects/p/salix/language/ja/)\n"
+"PO-Revision-Date: 2015-08-19 10:31+0000\n"
+"Last-Translator: tsuren <hydrangea_and_snail@hotmail.com>\n"
+"Language-Team: Japanese (http://www.transifex.com/gapan/salix/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: src/spi:102
 msgid "This action requires root privileges."
-msgstr ""
+msgstr "このアクションには、ルート権限が必要です。"
 
 #: src/spi:182
 msgid "Available packages:"
-msgstr ""
+msgstr "使用できるパッケージ："
 
 #: src/spi:185 src/spi:197
 msgid "None"
@@ -31,7 +32,7 @@ msgstr "無し"
 
 #: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
-msgstr ""
+msgstr "インストール済み"
 
 #: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
@@ -39,27 +40,27 @@ msgstr "未インストール"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "使用できるSlackBuilds："
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "パッケージまたはSlackBuildがありません："
 
 #: src/spi:235
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "以下のパッケージがインストールされます："
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "以下のSlackBuildがインストールされます："
 
 #: src/spi:245
 msgid "Nothing to install"
-msgstr ""
+msgstr "インストールするパッケージがありません。"
 
 #: src/spi:302
 msgid "Updating package cache..."
-msgstr ""
+msgstr "パッケージ·キャッシュを更新しています。"
 
 #: src/spi:306
 msgid "Updating SlackBuild cache..."
@@ -71,7 +72,7 @@ msgstr "使用法："
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[オプション][文字列]"
 
 #: src/spi:422
 msgid "OPTIONS:"
@@ -79,35 +80,35 @@ msgstr "オプション："
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "指定されたパッケージを検索 (デフォルト)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "パッケージやSlackBuildの詳細を表示"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr ""
+msgstr "パッケージとSlackBuildのキャッシュを除去する。"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "パッケージとSlackBuildのキャッシュを更新する。"
 
 #: src/spi:427
 msgid "upgrade packages"
-msgstr ""
+msgstr "パッケージをアップグレードする。"
 
 #: src/spi:428
 msgid "install specified packages"
-msgstr ""
+msgstr "指定されたパッケージをインストールします。"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "指定されたパッケージのインストールをシミュレートする。"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr ""
+msgstr "カラー出力を無効にする。"
 
 #: src/spi:431
 msgid "this help message"

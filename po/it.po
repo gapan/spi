@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Giuseppe Pignataro <rogepix@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-01-02 13:50+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/salix/language/it/)\n"
+"PO-Revision-Date: 2015-08-11 11:25+0000\n"
+"Last-Translator: Giuseppe Pignataro <rogepix@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/gapan/salix/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: src/spi:102
 msgid "This action requires root privileges."
-msgstr ""
+msgstr "Questa azione richiede i privilegi di root."
 
 #: src/spi:182
 msgid "Available packages:"
-msgstr ""
+msgstr "Pacchetti disponibili:"
 
 #: src/spi:185 src/spi:197
 msgid "None"
@@ -31,7 +32,7 @@ msgstr "Nessuno"
 
 #: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
-msgstr ""
+msgstr "Installati"
 
 #: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
@@ -39,19 +40,19 @@ msgstr "Non installato"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "SlackBuild disponibili:"
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Nessun pacchetto o Slackbuild:"
 
 #: src/spi:235
 msgid "The following packages will be installed:"
-msgstr ""
+msgstr "I seguenti pacchetti verranno installati:"
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "I seguenti Slackbuild verrano installati:"
 
 #: src/spi:245
 msgid "Nothing to install"
@@ -59,7 +60,7 @@ msgstr "Nulla da installare"
 
 #: src/spi:302
 msgid "Updating package cache..."
-msgstr ""
+msgstr "Aggiornamento cache pacchetto..."
 
 #: src/spi:306
 msgid "Updating SlackBuild cache..."
@@ -95,11 +96,11 @@ msgstr ""
 
 #: src/spi:427
 msgid "upgrade packages"
-msgstr ""
+msgstr "aggiorna pacchetti"
 
 #: src/spi:428
 msgid "install specified packages"
-msgstr ""
+msgstr "installa i pacchetti specificati"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"

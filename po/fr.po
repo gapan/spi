@@ -4,14 +4,15 @@
 # 
 # Translators:
 # hidd <chiffon21@live.fr>, 2014
+# Michel DUPRES <mdu8872@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2014-05-23 21:51+0000\n"
-"Last-Translator: hidd <chiffon21@live.fr>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/salix/language/fr/)\n"
+"PO-Revision-Date: 2015-08-11 11:25+0000\n"
+"Last-Translator: Michel DUPRES <mdu8872@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/gapan/salix/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: src/spi:102
 msgid "This action requires root privileges."
-msgstr ""
+msgstr "Cette opération nécessite les droits administrateur (root)"
 
 #: src/spi:182
 msgid "Available packages:"
@@ -40,11 +41,11 @@ msgstr "Non installé"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr ""
+msgstr "Paquets SclakBuids disponibles"
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr ""
+msgstr "Paquet ou SlackBuild absent"
 
 #: src/spi:235
 msgid "The following packages will be installed:"
@@ -52,7 +53,7 @@ msgstr "Les paquets suivants seront installés :"
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr ""
+msgstr "Les paquets SlackBuilds suivants seront installés"
 
 #: src/spi:245
 msgid "Nothing to install"
@@ -72,7 +73,7 @@ msgstr "UTILISATION :"
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[OPTIONS] [STRING(s)]"
 
 #: src/spi:422
 msgid "OPTIONS:"
@@ -80,35 +81,35 @@ msgstr "OPTIONS :"
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "cherche les paquets sélectionnés (action par défaut)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "monter les détails à propos du paquet ou du SlackBuild"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr ""
+msgstr "vide le cache des paquets et SlackBuilds"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "met à jour le cache des paquets et SlackBuild"
 
 #: src/spi:427
 msgid "upgrade packages"
-msgstr ""
+msgstr "met à jour les paquets"
 
 #: src/spi:428
 msgid "install specified packages"
-msgstr ""
+msgstr "installe les paquets sélectionnés"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "teste l'installation des paquets sélectionnés"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr ""
+msgstr "désactive l'affichage couleur"
 
 #: src/spi:431
 msgid "this help message"
