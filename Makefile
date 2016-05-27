@@ -2,29 +2,36 @@ PREFIX ?= /usr/local
 DESTDIR ?= /
 PACKAGE_LOCALE_DIR ?= /usr/share/locale
 
+.PHONY: all
 all: man mo
 
+.PHONY: man
 man:
 	txt2tags -o man/spi.man man/spi.t2t 
 
+.PHONY: mo
 mo:
 	for i in `ls po/*.po`; do \
 		msgfmt $$i -o `echo $$i | sed "s/\.po//"`.mo; \
 	done
 
+.PHONY: updatepo
 updatepo:
 	for i in `ls po/*.po`; do \
 		msgmerge -UNs $$i po/spi.pot; \
 	done
 
+.PHONY: pot
 pot:
 	xgettext -L Python -o po/spi.pot src/spi.py
 
+.PHONY: clean
 clean:
 	rm -f po/*.mo
 	rm -f po/*.po~
 	rm -f man/spi.man
 
+.PHONY: install
 install:
 	install -Dm 755 src/spi $(DESTDIR)/$(PREFIX)/bin/spi
 	install -Dm 755 src/spi.py $(DESTDIR)/usr/libexec/spi.py
@@ -36,5 +43,3 @@ install:
 	done
 	install -Dm 644 man/spi.man $(DESTDIR)/$(PREFIX)/man/man8/spi.8
 
-
-.PHONY: all man mo updatepo pot clean install
