@@ -3,113 +3,113 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Giuseppe Pignataro <rogepix@gmail.com>, 2015
+# Davidmp <medipas@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2016-06-12 18:43+0000\n"
-"Last-Translator: Antonio Sardei <laplume@libero.it>\n"
-"Language-Team: Italian (http://www.transifex.com/gapan/salix/language/it/)\n"
+"PO-Revision-Date: 2016-06-20 14:26+0000\n"
+"Last-Translator: Davidmp <medipas@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/gapan/salix/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/spi:102
 msgid "This action requires root privileges."
-msgstr "Questa azione richiede i privilegi di root."
+msgstr "Aquesta acció necessita privilegis d'arrel"
 
 #: src/spi:182
 msgid "Available packages:"
-msgstr "Pacchetti disponibili:"
+msgstr "Paquets disponibles:"
 
 #: src/spi:185 src/spi:197
 msgid "None"
-msgstr "Nessuno"
+msgstr "Cap"
 
 #: src/spi:190 src/spi:202 src/spi:361
 msgid "Installed"
-msgstr "Installati"
+msgstr "Instal·lat"
 
 #: src/spi:192 src/spi:204 src/spi:363
 msgid "Not installed"
-msgstr "Non installato"
+msgstr "No instal·lat"
 
 #: src/spi:194
 msgid "Available SlackBuilds:"
-msgstr "SlackBuild disponibili:"
+msgstr "SlackBuilds disponibles:"
 
 #: src/spi:223 src/spi:267 src/spi:367
 msgid "No such package or SlackBuild:"
-msgstr "Nessun pacchetto o Slackbuild:"
+msgstr "No hi ha el paquet o l'SlackBuild:"
 
 #: src/spi:235
 msgid "The following packages will be installed:"
-msgstr "I seguenti pacchetti verranno installati:"
+msgstr "S'instal·laran els paquets següents:"
 
 #: src/spi:241
 msgid "The following SlackBuilds will be installed:"
-msgstr "I seguenti Slackbuild verrano installati:"
+msgstr "S'instal·laran els SlackBuilds següents:"
 
 #: src/spi:245
 msgid "Nothing to install"
-msgstr "Nulla da installare"
+msgstr "Res per instal·lar"
 
 #: src/spi:302
 msgid "Updating package cache..."
-msgstr "Aggiornamento cache pacchetto..."
+msgstr "S'actualitza la cau de paquets..."
 
 #: src/spi:306
 msgid "Updating SlackBuild cache..."
-msgstr "Aggiornamento della cache di SlackBuild..."
+msgstr "S'actualitza la cau d'SlackBuild..."
 
 #: src/spi:420
 msgid "USAGE:"
-msgstr "UTILIZZO:"
+msgstr "ÚS:"
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr "[OPTIONS] [STRING(s)"
+msgstr "[OPCIONS] [CADENES]"
 
 #: src/spi:422
 msgid "OPTIONS:"
-msgstr "OPZIONI:"
+msgstr "OPCIONS:"
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr "ricerca dei pacchetti selezionati (azione predefinita)"
+msgstr "cerca paquets especificats (acció per defecte)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr "mostra i dettagli del pacchetto o dello SlackBuild"
+msgstr "mostra els detalls d'un paquet o SlackBuild"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr "pulisci la cache dei pacchetti e degli SlackBuild"
+msgstr "purga la cau del paquet i SlackBuild"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr "aggiorna la cache dei pacchetti e degli SlackBuild"
+msgstr "actualitza la cau del paquet i SlackBuild"
 
 #: src/spi:427
 msgid "upgrade packages"
-msgstr "aggiorna pacchetti"
+msgstr "actualitza els paquets"
 
 #: src/spi:428
 msgid "install specified packages"
-msgstr "installa i pacchetti specificati"
+msgstr "instal·la els paquets especificats"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr "simula l'installazione dei pacchetti selezionati"
+msgstr "simula la instal·lació de paquets especificats"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr "disabilita output colorato"
+msgstr "inhabilita la sortida en color"
 
 #: src/spi:431
 msgid "this help message"
-msgstr "questo messaggio di aiuto"
+msgstr "aquest missatge d'ajuda"
