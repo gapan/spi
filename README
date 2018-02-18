@@ -1,7 +1,7 @@
 spi (Salix Package Installer) is a command line tool that acts as a
 wrapper around slapt-get and slapt-src.
 
-It searches both package (slapt-get) and SlackBuild (slapt-get) local
+It searches both package (slapt-get) and SlackBuild (slapt-src) local
 caches for software. It can also update both local caches.
 
 When installing software, if a package is available through slapt-get,
