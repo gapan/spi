@@ -327,6 +327,50 @@ def striplib(l):
         new.append(n)
     return new
 
+# prints a SlackBuild's README file, if it's there
+def print_slackbuild_readme(slackbuild):
+    # just to be on the safe side
+    sourceurl = None
+    location = None
+    files = None
+    
+    data = ''
+    f = open(slackbuilds_data)
+    done = False
+    found = False
+    while not done:
+        line = f.readline()
+        if line == 'SLACKBUILD NAME: '+slackbuild+'\n':
+            found = True
+        if found is True:
+            if line.startswith('SLACKBUILD'):
+                data = ''.join([data, line])
+            else:
+                done = True
+    f.close()
+    pkginfo = data.splitlines()
+    for i in pkginfo:
+        if 'SLACKBUILD SOURCEURL: ' in i:
+            sourceurl = i.partition('SOURCEURL: ')[2]
+        elif 'SLACKBUILD LOCATION: ' in i:
+            location = i.partition('LOCATION: ')[2]
+        elif 'SLACKBUILD FILES: ' in i:
+            files = i.partition('FILES: ')[2].rsplit(' ')
+    if 'README' in files:
+        try:
+            # setting a timeout of 5 seconds. We don't want this to
+            # take too long
+            f = urllib.request.urlopen(sourceurl+location+'README', None, 5)
+            readme = f.read().splitlines()
+            print("\nREADME:")
+            for line in readme:
+                try:
+                    print(line.decode('utf8'))
+                except UnicodeDecodeError:
+                    print(line.decode('latin1'))
+        except (urllib.error.HTTPError, urllib.error.URLError):
+            pass
+
 # Shows information about package/SlackBuild. Essentially runs
 # slapt-get --show or slapt-src --show
 def show(args):
@@ -359,48 +403,7 @@ def show(args):
                 print(_("Not installed")+".")
             
             # Now show the README if it's there
-            #
-            # just to be on the safe side
-            sourceurl = None
-            location = None
-            files = None
-            
-            data = ''
-            f = open(slackbuilds_data)
-            done = False
-            found = False
-            while not done:
-                line = f.readline()
-                if line == 'SLACKBUILD NAME: '+arg+'\n':
-                    found = True
-                if found is True:
-                    if line.startswith('SLACKBUILD'):
-                        data = ''.join([data, line])
-                    else:
-                        done = True
-            f.close()
-            pkginfo = data.splitlines()
-            for i in pkginfo:
-                if 'SLACKBUILD SOURCEURL: ' in i:
-                    sourceurl = i.partition('SOURCEURL: ')[2]
-                elif 'SLACKBUILD LOCATION: ' in i:
-                    location = i.partition('LOCATION: ')[2]
-                elif 'SLACKBUILD FILES: ' in i:
-                    files = i.partition('FILES: ')[2].rsplit(' ')
-            if 'README' in files:
-                try:
-                    # setting a timeout of 5 seconds. We don't want this to
-                    # take too long
-                    f = urllib.request.urlopen(sourceurl+location+'README', None, 5)
-                    readme = f.read().splitlines()
-                    print("\nREADME:")
-                    for line in readme:
-                        try:
-                            print(line.decode('utf8'))
-                        except UnicodeDecodeError:
-                            print(line.decode('latin1'))
-                except (urllib.error.HTTPError, urllib.error.URLError):
-                    pass
+            print_slackbuild_readme(arg)
             # done, print the footer
             if (l>1):
                 print_header(arg, notext=True)
