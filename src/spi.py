@@ -1,19 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # vim:et:sta:sts=4:sw=4:ts=8:tw=79:
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 import getopt
 import sys
 import os
 import subprocess
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import re
 
 # Internationalization
 import locale
 import gettext
-gettext.install("spi", "/usr/share/locale", unicode=1)
+gettext.install("spi", "/usr/share/locale")
 
 slaptget = '/usr/sbin/slapt-get'
 slaptsrc = '/usr/bin/slapt-src'
@@ -136,7 +136,7 @@ def pkglist(args):
     env['LANG'] = 'C'
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
             stderr=subprocess.PIPE, env=env)
-    pkglist_output = p.communicate()[0]
+    pkglist_output = p.communicate()[0].decode()
     status = p.returncode
     pkglist_output = pkglist_output.splitlines()
     pkgs = []
@@ -171,7 +171,8 @@ def slackbuildlist(args):
     pkgs = []
     pkgnames = []
     for line in pkglist_output:
-        pkgfullname = line.partition(' - ')[0]
+        decoded_line = line.decode()
+        pkgfullname = decoded_line.partition(' - ')[0]
         pkgshortname = pkgfullname.rpartition(':')[0]
         if pkgshortname not in pkgnames:
             pkgnames.append(pkgshortname)
@@ -179,7 +180,7 @@ def slackbuildlist(args):
                 pkginst = True
             else:
                 pkginst = False
-            pkgdesc = line.partition(' - ')[2] 
+            pkgdesc = decoded_line.partition(' - ')[2] 
             pkgs.append([pkgshortname, pkginst, pkgdesc])
     return pkgs
 
@@ -240,13 +241,13 @@ def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
         pqueue = sorted(slaptgetdeps(pqueue))
         squeue = sorted(squeue)
         if pqueue != []:
-            print(_('The following packages will be installed:')+'\n  ', end=' ')
+            print(_('The following packages will be installed:'))
             for i in pqueue:
                 print(i, end=' ')
         if squeue != []:
             if pqueue != []:
                 print("\n")
-            print(_('The following SlackBuilds will be installed:')+'\n  ', end=' ')
+            print(_('The following SlackBuilds will be installed:'))
             for i in squeue:
                 print(i, end=' ')
         if ((pqueue == []) and (squeue == [])):
@@ -416,7 +417,7 @@ def show(args):
                 try:
                     # setting a timeout of 5 seconds. We don't want this to
                     # take too long
-                    f = urllib2.urlopen(sourceurl+location+'README', None, 5)
+                    f = urllib.request.urlopen(sourceurl+location+'README', None, 5)
                     readme = f.read().splitlines()
                     print("\nREADME:")
                     for line in readme:
@@ -424,7 +425,7 @@ def show(args):
                             print(line.decode('utf8'))
                         except UnicodeDecodeError:
                             print(line.decode('latin1'))
-                except (urllib2.HTTPError, urllib2.URLError):
+                except (urllib.error.HTTPError, urllib.error.URLError):
                     pass
             # done, print the footer
             if (l>1):
@@ -451,8 +452,9 @@ def slaptgetdeps(pkgs):
     output = p.communicate()[0]
     data = ''
     for line in output.splitlines():
-        if line.endswith(' is to be installed'):
-            data = line.rpartition(' is to be installed')[0].rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
+        decoded_line = line.decode()
+        if decoded_line.endswith(' is to be installed'):
+            data = decoded_line.rpartition(' is to be installed')[0].rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
             if data is not '':
                 if data not in deps:
                     deps.append(data)
@@ -472,8 +474,9 @@ def slaptsrcdeps(pkg):
     output = p.communicate()[0]
     data = ''
     for line in output.splitlines():
-        if line.startswith('SlackBuild Requires:'):
-            data = line.partition(':')[2]
+        decoded_line = line.decode()
+        if decoded_line.startswith('SlackBuild Requires:'):
+            data = decoded_line.partition(':')[2]
     newdeps = data.replace('\n', ',').strip(' ').split(',')
     for i in newdeps:
         if i is not '' and i != '%README%':
