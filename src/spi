@@ -103,8 +103,8 @@ def pkg_installed():
     return pkg_installed
 
 # Returns a list of packages that match the search criteria (args)
-# Each entry in the list has the following format:
-# [pkgshortname, pkginst, pkgdesc]
+# Each entry in the list is a dict with 'name', 'installed' and 'description'
+# keys.
 def pkglist(args):
     cmd = [slaptget, '--search']
     for arg in args:
@@ -119,16 +119,17 @@ def pkglist(args):
     pkgs = []
     pkgnames = []
     for line in pkglist_output:
+        entry = {}
         pkgfullname = line.partition('[inst=')[0]
-        pkgshortname = pkgfullname.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
-        if pkgshortname not in pkgnames:
-            pkgnames.append(pkgshortname)
-            if pkgshortname in pkg_installed():
-                pkginst = True
+        entry['name'] = pkgfullname.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
+        if entry['name'] not in pkgnames:
+            pkgnames.append(entry['name'])
+            if entry['name'] in pkg_installed():
+                entry['installed'] = True
             else:
-                pkginst = False
-            pkgdesc = line.partition(']: ')[2] 
-            pkgs.append([pkgshortname, pkginst, pkgdesc])
+                entry['installed'] = False
+            entry['description'] = line.partition(']: ')[2]
+            pkgs.append(entry)
     return pkgs
 
 # Returns a list of SlackBuilds that match the search criteria (args)
@@ -146,17 +147,18 @@ def slackbuildlist(args):
     pkgs = []
     pkgnames = []
     for line in pkglist_output:
+        entry = {}
         decoded_line = line.decode()
         pkgfullname = decoded_line.partition(' - ')[0]
-        pkgshortname = pkgfullname.rpartition(':')[0]
-        if pkgshortname not in pkgnames:
-            pkgnames.append(pkgshortname)
-            if pkgshortname in pkg_installed():
-                pkginst = True
+        entry['name'] = pkgfullname.rpartition(':')[0]
+        if entry['name'] not in pkgnames:
+            pkgnames.append(entry['name'])
+            if entry['name'] in pkg_installed():
+                entry['installed'] = True
             else:
-                pkginst = False
-            pkgdesc = decoded_line.partition(' - ')[2] 
-            pkgs.append([pkgshortname, pkginst, pkgdesc])
+                entry['installed'] = False
+            entry['description'] = decoded_line.partition(' - ')[2] 
+            pkgs.append(entry)
     return pkgs
 
 def search(args):
@@ -169,24 +171,22 @@ def search(args):
         print(_('None'))
     else:
         for i in pl:
-            pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
-            if pkginst is True:
-                pkginst = string_green(_('Installed'))
+            if i['installed'] is True:
+                installed = string_green(_('Installed'))
             else:
-                pkginst = string_red(_('Not installed'))
-            print(pkgname+' ['+pkginst+']:', pkgdesc)
+                installed = string_red(_('Not installed'))
+            print(i['name']+' ['+installed+']:', i['description'])
     print("\n"+_('Available SlackBuilds:'))
     sl = slackbuildlist(args)
     if sl == []:
         print(_('None'))
     else:
         for i in sl:
-            pkgname, pkginst, pkgdesc  = i[0], i[1], i[2]
-            if pkginst is True:
-                pkginst = string_green(_('Installed'))
+            if i['installed'] is True:
+                installed = string_green(_('Installed'))
             else:
-                pkginst = string_red(_('Not installed'))
-            print(pkgname+' ['+pkginst+']:', pkgdesc)
+                installed = string_red(_('Not installed'))
+            print(i['name']+' ['+installed+']:', i['description'])
 
 # Simulates the installation of packages. Provides a list of packages
 # and SlackBuilds that will be installed.
@@ -195,10 +195,10 @@ def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
     sl = slackbuildlist(args) 
     p = []
     for i in pl:
-        p.append(i[0])
+        p.append(i['name'])
     s = []
     for i in sl:
-        s.append(i[0])
+        s.append(i['name'])
     both = p+s
     if installed == []:
         installed = pkg_installed()
@@ -237,10 +237,10 @@ def install(args):
     sl = slackbuildlist(args)
     p = []
     for i in pl:
-        p.append(i[0])
+        p.append(i['name'])
     s = []
     for i in sl:
-        s.append(i[0])
+        s.append(i['name'])
     for arg in args:
         if arg not in pkg_installed():
             if arg in p:
@@ -336,10 +336,10 @@ def show(args):
     sl = slackbuildlist(args)
     p = []
     for i in pl:
-        p.append(i[0])
+        p.append(i['name'])
     s = []
     for i in sl:
-        s.append(i[0])
+        s.append(i['name'])
     for arg in args:
         if arg in p:
             if (l>1):
