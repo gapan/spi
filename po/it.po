@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-02 15:51+0200\n"
-"PO-Revision-Date: 2015-08-11 11:25+0000\n"
-"Last-Translator: Giuseppe Pignataro <rogepix@gmail.com>\n"
+"PO-Revision-Date: 2017-09-19 22:08+0000\n"
+"Last-Translator: Antonio Sardei <laplume@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/gapan/salix/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +72,7 @@ msgstr "UTILIZZO:"
 
 #: src/spi:420
 msgid "[OPTIONS] [STRING(s)]"
-msgstr ""
+msgstr "[OPTIONS] [STRING(s)"
 
 #: src/spi:422
 msgid "OPTIONS:"
@@ -80,19 +80,19 @@ msgstr "OPZIONI:"
 
 #: src/spi:423
 msgid "search for specified packages (default action)"
-msgstr ""
+msgstr "ricerca dei pacchetti selezionati (azione predefinita)"
 
 #: src/spi:424
 msgid "show details about package or SlackBuild"
-msgstr ""
+msgstr "mostra i dettagli del pacchetto o dello SlackBuild"
 
 #: src/spi:425
 msgid "purge package and SlackBuild caches"
-msgstr ""
+msgstr "pulisci la cache dei pacchetti e degli SlackBuild"
 
 #: src/spi:426
 msgid "update package and SlackBuild caches"
-msgstr ""
+msgstr "aggiorna la cache dei pacchetti e degli SlackBuild"
 
 #: src/spi:427
 msgid "upgrade packages"
@@ -104,11 +104,11 @@ msgstr "installa i pacchetti specificati"
 
 #: src/spi:429
 msgid "simulate installation of specified packages"
-msgstr ""
+msgstr "simula l'installazione dei pacchetti selezionati"
 
 #: src/spi:430
 msgid "disable colour output"
-msgstr ""
+msgstr "disabilita output colorato"
 
 #: src/spi:431
 msgid "this help message"
