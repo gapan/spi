@@ -142,8 +142,7 @@ def pkglist(args):
     pkgs = []
     pkgnames = []
     for line in pkglist_output:
-        decoded_line = line.decode()
-        pkgfullname = decoded_line.partition('[inst=')[0]
+        pkgfullname = line.partition('[inst=')[0]
         pkgshortname = pkgfullname.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
         if pkgshortname not in pkgnames:
             pkgnames.append(pkgshortname)
@@ -151,7 +150,7 @@ def pkglist(args):
                 pkginst = True
             else:
                 pkginst = False
-            pkgdesc = decoded_line.partition(']: ')[2] 
+            pkgdesc = line.partition(']: ')[2] 
             pkgs.append([pkgshortname, pkginst, pkgdesc])
     return pkgs
 
