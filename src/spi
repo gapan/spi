@@ -19,9 +19,6 @@ slaptget = '/usr/sbin/slapt-get'
 slaptsrc = '/usr/bin/slapt-src'
 slackbuilds_data = '/usr/src/slapt-src/slackbuilds_data'
 
-# create a copy of the default environment
-initial_env = dict()
-
 class Colours:
     RED = '\033[01;31m'
     GREEN = '\033[01;32m'
@@ -114,8 +111,6 @@ def pkglist(args):
     for arg in args:
         cmd.append(arg)
     env = dict()
-    for i in initial_env:
-        env[i] = initial_env[i]
     env['LANG'] = 'C'
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
             stderr=subprocess.PIPE, env=env)
@@ -143,8 +138,6 @@ def slackbuildlist(args):
     for arg in args:
         cmd.append(arg)
     env = dict()
-    for i in initial_env:
-        env[i] = initial_env[i]
     env['LANG'] = 'C'
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
             stderr=subprocess.PIPE, env=env)
@@ -428,8 +421,6 @@ def slaptgetdeps(pkgs):
     for i in pkgs:
         args.append(i)
     env = dict()
-    for i in initial_env:
-        env[i] = initial_env[i]
     env['LANG'] = 'C'
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL, env=env)
     output = p.communicate()[0]
@@ -450,8 +441,6 @@ def slaptsrcdeps(pkg):
     DEVNULL = open('/dev/null', 'w')
     args = [slaptsrc, '--show', pkg]
     env = dict()
-    for i in initial_env:
-        env[i] = initial_env[i]
     env['LANG'] = 'C'
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL, env=env)
     output = p.communicate()[0]
