@@ -307,11 +307,12 @@ def print_header(text, notext=False):
     if notext:
         for i in range(0,73):
             line=line+"-"
-        print(string_yellow("+----")+string_yellow(line+"+"))
+        print(string_yellow("+----")+string_yellow(line+"+"), flush = True)
     else:
         for i in range(0,71-len(text)):
             line=line+"-"
-        print(string_yellow("+----")+" "+text+" "+string_yellow(line+"+"))
+        print(string_yellow("+----")+" "+text+" "+string_yellow(line+"+"),
+                flush = True)
 
 # a helper function that strips "lib" from the start and end of strings
 # in lists. Replaces the "lib" part only if the string has some other
@@ -343,7 +344,6 @@ def show(args):
         if arg in p:
             if (l>1):
                 print_header(arg)
-                sys.stdout.flush()
             process = subprocess.Popen([slaptget, '--show', arg])
             process.wait()
             if (l>1):
@@ -351,7 +351,6 @@ def show(args):
         elif arg in s:
             if (l>1):
                 print_header(arg)
-                sys.stdout.flush()
             process = subprocess.Popen([slaptsrc, '--show', arg])
             process.wait()
             if arg in pkg_installed():
@@ -407,8 +406,7 @@ def show(args):
                 print_header(arg, notext=True)
         else:
             print(string_red(_('No such package or SlackBuild:'))+' '+arg)
-        print()
-        sys.stdout.flush()
+        print("", flush = True)
 
 
 # Returns the dependencies of the packages included in pkgs.
