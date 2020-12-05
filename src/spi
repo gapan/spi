@@ -1,5 +1,479 @@
-#!/bin/sh
+#!/usr/bin/env python3
+# vim:et:sta:sts=4:sw=4:ts=8:tw=79:
+# -*- coding: utf-8 -*-
 
-export PYTHONIOENCODING=utf-8
+import getopt
+import sys
+import os
+import subprocess
+import urllib.request, urllib.error
+import re
 
-/usr/libexec/spi.py "$@"
+# Internationalization
+import locale
+import gettext
+gettext.install("spi", "/usr/share/locale")
+
+slaptget = '/usr/sbin/slapt-get'
+slaptsrc = '/usr/bin/slapt-src'
+slackbuilds_data = '/usr/src/slapt-src/slackbuilds_data'
+
+class Colours:
+    RED = '\033[01;31m'
+    GREEN = '\033[01;32m'
+    YELLOW = '\033[01;33m'
+    RESET = '\033[00m'
+
+    def disable(self):
+        self.RED = ''
+        self.GREEN = ''
+        self.YELLOW = ''
+        self.RESET = ''
+
+colour = Colours()
+
+def main(argv):
+    try:
+        opts, args = getopt.getopt(argv, "nhuUis", ["no-colour",
+            "help", "update", "upgrade" , "install", "search", "show",
+            "simulate", "clean"])
+        
+        do_show = False
+        do_install = False
+        do_simulate = False
+        for opt, arg in opts:
+            if opt in ("-n", "--no-colour"):
+                colour.disable()
+            elif opt in ("-h", "--help"):
+                usage()
+                sys.exit(0)
+            elif opt in ("-u", "--update"):
+                retval = update()
+                sys.exit(retval)
+            elif opt in ("-U", "--upgrade"):
+                retval = upgrade()
+                sys.exit(retval)
+            elif opt in ("--show",):
+                do_show = True
+            elif opt in ("-i", "--install"):
+                do_install = True
+            elif opt in ("-s", "--simulate"):
+                do_simulate = True
+            elif opt in ("--clean",):
+                retval = clean()
+                sys.exit(retval)
+            elif opt in ("--search",):
+                pass
+        if not len(args) > 0:
+            usage()
+            sys.exit(0)
+        if do_show:
+            show(args)
+        elif do_install:
+            if do_simulate:
+                simulate(args)
+            else:
+                install(args)
+        else:
+            search(args)
+
+    except getopt.GetoptError:
+        usage()
+        sys.exit(1)
+
+def check_for_root():
+    if os.geteuid() != 0:
+        print(_('This action requires root privileges.'))
+        sys.exit(1)
+
+def string_red(string):
+    return colour.RED+string+colour.RESET
+
+def string_green(string):
+    return colour.GREEN+string+colour.RESET
+
+def string_yellow(string):
+    return colour.YELLOW+string+colour.RESET
+
+# Returns a list with the names of installed packages (names only)
+def pkg_installed():
+    pkg_installed = []
+    for i in os.listdir('/var/log/packages'):
+        pkg_installed.append(i.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0])
+    return pkg_installed
+
+# Returns a list of packages that match the search criteria (args)
+# Each entry in the list is a dict with 'name', 'installed' and 'description'
+# keys.
+def pkglist(args):
+    cmd = [slaptget, '--search']
+    for arg in args:
+        cmd.append(arg)
+    env = dict()
+    env['LANG'] = 'C'
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, env=env)
+    pkglist_output = p.communicate()[0].decode()
+    status = p.returncode
+    pkglist_output = pkglist_output.splitlines()
+    pkgs = []
+    pkgnames = []
+    for line in pkglist_output:
+        entry = {}
+        pkgfullname = line.partition('[inst=')[0]
+        entry['name'] = pkgfullname.rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
+        if entry['name'] not in pkgnames:
+            pkgnames.append(entry['name'])
+            if entry['name'] in pkg_installed():
+                entry['installed'] = True
+            else:
+                entry['installed'] = False
+            entry['description'] = line.partition(']: ')[2]
+            pkgs.append(entry)
+    return pkgs
+
+# Returns a list of SlackBuilds that match the search criteria (args)
+def slackbuildlist(args):
+    cmd = [slaptsrc, '--search']
+    for arg in args:
+        cmd.append(arg)
+    env = dict()
+    env['LANG'] = 'C'
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, env=env)
+    pkglist_output = p.communicate()[0]
+    status = p.returncode
+    pkglist_output = pkglist_output.splitlines()
+    pkgs = []
+    pkgnames = []
+    for line in pkglist_output:
+        entry = {}
+        decoded_line = line.decode()
+        pkgfullname = decoded_line.partition(' - ')[0]
+        entry['name'] = pkgfullname.rpartition(':')[0]
+        if entry['name'] not in pkgnames:
+            pkgnames.append(entry['name'])
+            if entry['name'] in pkg_installed():
+                entry['installed'] = True
+            else:
+                entry['installed'] = False
+            entry['description'] = decoded_line.partition(' - ')[2] 
+            pkgs.append(entry)
+    return pkgs
+
+def search(args):
+    # strip "lib" prefixes and suffixes in names, so when searching for
+    # "libfoo" or "foolib" results for "foo" are shown
+    args = striplib(args)
+    print(_('Available packages:'))
+    pl = pkglist(args)
+    if pl == []:
+        print(_('None'))
+    else:
+        for i in pl:
+            if i['installed'] is True:
+                installed = string_green(_('Installed'))
+            else:
+                installed = string_red(_('Not installed'))
+            print(i['name']+' ['+installed+']:', i['description'])
+    print("\n"+_('Available SlackBuilds:'))
+    sl = slackbuildlist(args)
+    if sl == []:
+        print(_('None'))
+    else:
+        for i in sl:
+            if i['installed'] is True:
+                installed = string_green(_('Installed'))
+            else:
+                installed = string_red(_('Not installed'))
+            print(i['name']+' ['+installed+']:', i['description'])
+
+# Simulates the installation of packages. Provides a list of packages
+# and SlackBuilds that will be installed.
+def simulate(args, done=True, pqueue=[], squeue=[], installed=[]):
+    pl = pkglist(args)
+    sl = slackbuildlist(args) 
+    p = []
+    for i in pl:
+        p.append(i['name'])
+    s = []
+    for i in sl:
+        s.append(i['name'])
+    both = p+s
+    if installed == []:
+        installed = pkg_installed()
+    for arg in args:
+        if arg not in both:
+            print(string_red(_('No such package or SlackBuild:'))+' '+arg)
+            sys.exit(1)
+        if ((arg not in installed) and (arg not in pqueue) and (arg not in squeue)):
+            if arg in p:
+                pqueue.append(arg)
+            elif arg in s:
+                squeue.append(arg)
+                simulate(slaptsrcdeps(arg), False, pqueue, squeue, installed)
+    if done:
+        pqueue = sorted(slaptgetdeps(pqueue))
+        squeue = sorted(squeue)
+        if pqueue != []:
+            print(_('The following packages will be installed:'))
+            for i in pqueue:
+                print(i, end=' ')
+        if squeue != []:
+            if pqueue != []:
+                print("\n")
+            print(_('The following SlackBuilds will be installed:'))
+            for i in squeue:
+                print(i, end=' ')
+        if ((pqueue == []) and (squeue == [])):
+            print(_('Nothing to install'))
+        else:
+            print()
+
+# Installs the packages/SlackBuilds that are given in args
+def install(args):
+    check_for_root()
+    pl = pkglist(args)
+    sl = slackbuildlist(args)
+    p = []
+    for i in pl:
+        p.append(i['name'])
+    s = []
+    for i in sl:
+        s.append(i['name'])
+    for arg in args:
+        if arg not in pkg_installed():
+            if arg in p:
+                installpkg(arg)
+            elif arg in s:
+                installsb(arg)
+            else:
+                print(string_red(_('No such package or SlackBuild:'))+' '+arg)
+                sys.exit(1)
+
+# installs packages, including any dependencies
+def installpkg(pkg):
+    p = subprocess.Popen([slaptget, '--no-prompt', '--install',
+        pkg])
+    retval = p.wait()
+    if retval != 0:
+        sys.exit(retval)
+
+# installs SlackBuilds. Does not include dependencies.
+def installsb(slackbuild):
+    deps = slaptsrcdeps(slackbuild)
+    if deps != []:
+        install(deps)
+    p = subprocess.Popen([slaptsrc, '--no-dep', '--yes', '--install',
+        slackbuild])
+    retval = p.wait()
+    if retval != 0:
+        sys.exit(retval)
+
+# Cleans up the slapt-get and slapt-src caches
+def clean():
+    check_for_root()
+    p = subprocess.Popen([slaptget, '--clean'])
+    retval = p.wait()
+    if retval == 0:
+        p = subprocess.Popen([slaptsrc, '--clean'])
+        retval = p.wait()
+    return retval
+
+# Updates the slapt-get and slapt-src repos
+def update():
+    check_for_root()
+    print(_('Updating package cache...'))
+    p = subprocess.Popen([slaptget, '--update'])
+    retval = p.wait()
+    if retval == 0:
+        print("\n"+_('Updating SlackBuild cache...'))
+        p = subprocess.Popen([slaptsrc, '--update'])
+        retval = p.wait()
+    return retval
+
+# Upgrades the packages with slapt-get
+# No such thing is available for slapt-src
+def upgrade():
+    check_for_root()
+    p = subprocess.Popen([slaptget, '--upgrade'])
+    retval = p.wait()
+    return retval
+
+# Just a helper function used in show(args) below. It prints the header
+# and footer, before displaying package/SlackBuild details respectively
+def print_header(text, notext=False):
+    line=""
+    if notext:
+        for i in range(0,73):
+            line=line+"-"
+        print(string_yellow("+----")+string_yellow(line+"+"), flush = True)
+    else:
+        for i in range(0,71-len(text)):
+            line=line+"-"
+        print(string_yellow("+----")+" "+text+" "+string_yellow(line+"+"),
+                flush = True)
+
+# a helper function that strips "lib" from the start and end of strings
+# in lists. Replaces the "lib" part only if the string has some other
+# chars in it.
+def striplib(l):
+    new = []
+    for i in l:
+        n = re.sub('^lib-(.)', r'\1', i)
+        n = re.sub('(.)-lib$', r'\1', n)
+        n = re.sub('^lib(.)', r'\1', n)
+        n = re.sub('(.)lib$', r'\1', n)
+        new.append(n)
+    return new
+
+# prints a SlackBuild's README file, if it's there
+def print_slackbuild_readme(slackbuild):
+    # just to be on the safe side
+    sourceurl = None
+    location = None
+    files = None
+    
+    data = ''
+    f = open(slackbuilds_data)
+    done = False
+    found = False
+    while not done:
+        line = f.readline()
+        if line == 'SLACKBUILD NAME: '+slackbuild+'\n':
+            found = True
+        if found is True:
+            if line.startswith('SLACKBUILD'):
+                data = ''.join([data, line])
+            else:
+                done = True
+    f.close()
+    pkginfo = data.splitlines()
+    for i in pkginfo:
+        if 'SLACKBUILD SOURCEURL: ' in i:
+            sourceurl = i.partition('SOURCEURL: ')[2]
+        elif 'SLACKBUILD LOCATION: ' in i:
+            location = i.partition('LOCATION: ')[2]
+        elif 'SLACKBUILD FILES: ' in i:
+            files = i.partition('FILES: ')[2].rsplit(' ')
+    if 'README' in files:
+        try:
+            # setting a timeout of 5 seconds. We don't want this to
+            # take too long
+            f = urllib.request.urlopen(sourceurl+location+'README', None, 5)
+            readme = f.read().splitlines()
+            print("\nREADME:")
+            for line in readme:
+                try:
+                    print(line.decode('utf8'))
+                except UnicodeDecodeError:
+                    print(line.decode('latin1'))
+        except (urllib.error.HTTPError, urllib.error.URLError):
+            pass
+
+# Shows information about package/SlackBuild. Essentially runs
+# slapt-get --show or slapt-src --show
+def show(args):
+    args = set(args)
+    l = len(args)
+    pl = pkglist(args)
+    sl = slackbuildlist(args)
+    p = []
+    for i in pl:
+        p.append(i['name'])
+    s = []
+    for i in sl:
+        s.append(i['name'])
+    for arg in args:
+        if arg in p:
+            if (l>1):
+                print_header(arg)
+            process = subprocess.Popen([slaptget, '--show', arg])
+            process.wait()
+            if (l>1):
+                print_header(arg, notext=True)
+        elif arg in s:
+            if (l>1):
+                print_header(arg)
+            process = subprocess.Popen([slaptsrc, '--show', arg])
+            process.wait()
+            if arg in pkg_installed():
+                print(_("Installed")+".")
+            else:
+                print(_("Not installed")+".")
+            
+            # Now show the README if it's there
+            print_slackbuild_readme(arg)
+            # done, print the footer
+            if (l>1):
+                print_header(arg, notext=True)
+        else:
+            print(string_red(_('No such package or SlackBuild:'))+' '+arg)
+        print("", flush = True)
+
+
+# Returns the dependencies of the packages included in pkgs.
+# pkgs is a list of package names.
+def slaptgetdeps(pkgs):
+    deps = []
+    DEVNULL = open('/dev/null', 'w')
+    args = [slaptget, '--simulate', '--install']
+    for i in pkgs:
+        args.append(i)
+    env = dict()
+    env['LANG'] = 'C'
+    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL, env=env)
+    output = p.communicate()[0]
+    data = ''
+    for line in output.splitlines():
+        decoded_line = line.decode()
+        if decoded_line.endswith(' is to be installed'):
+            data = decoded_line.rpartition(' is to be installed')[0].rpartition('-')[0].rpartition('-')[0].rpartition('-')[0]
+            if data is not '':
+                if data not in deps:
+                    deps.append(data)
+    DEVNULL.close()
+    return deps
+
+# Returns the dependencies of a single SlackBuild (pkg)
+def slaptsrcdeps(pkg):
+    deps = []
+    DEVNULL = open('/dev/null', 'w')
+    args = [slaptsrc, '--show', pkg]
+    env = dict()
+    env['LANG'] = 'C'
+    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=DEVNULL, env=env)
+    output = p.communicate()[0]
+    data = ''
+    for line in output.splitlines():
+        decoded_line = line.decode()
+        if decoded_line.startswith('SlackBuild Requires:'):
+            data = decoded_line.partition(':')[2]
+    newdeps = data.replace('\n', ',').strip(' ').split(',')
+    for i in newdeps:
+        if i is not '' and i != '%README%':
+            if i not in deps:
+                deps.append(i)
+    DEVNULL.close()
+    return deps
+
+def usage():
+    print(_('USAGE:'), 'spi',_('[OPTIONS] [STRING(s)]'))
+    print()
+    print(_('OPTIONS:'))
+    print('       --search      ',_('search for specified packages (default action)'))
+    print('       --show        ',_('show details about package or SlackBuild'))
+    print('       --clean       ',_('purge package and SlackBuild caches'))
+    print('   -u, --update      ',_('update package and SlackBuild caches'))
+    print('   -U, --upgrade     ',_('upgrade packages'))
+    print('   -i, --install     ',_('install specified packages'))
+    print('   -s, --simulate    ',_('simulate installation of specified packages'))
+    print('   -n, --no-colour   ',_('disable colour output'))
+    print('   -h, --help        ',_('this help message'))
+
+
+if __name__ == "__main__":
+    try:
+        main(sys.argv[1:])
+    except KeyboardInterrupt:
+        sys.exit(2)
