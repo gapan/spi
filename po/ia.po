@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Salix\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-02 15:51+0200\n"
+"PO-Revision-Date: 2020-03-04 22:26+0000\n"
+"Last-Translator: giogio <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua (http://www.transifex.com/gapan/salix/language/ia/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ia\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/spi:102
+msgid "This action requires root privileges."
+msgstr ""
+
+#: src/spi:182
+msgid "Available packages:"
+msgstr ""
+
+#: src/spi:185 src/spi:197
+msgid "None"
+msgstr "Necun"
+
+#: src/spi:190 src/spi:202 src/spi:361
+msgid "Installed"
+msgstr ""
+
+#: src/spi:192 src/spi:204 src/spi:363
+msgid "Not installed"
+msgstr ""
+
+#: src/spi:194
+msgid "Available SlackBuilds:"
+msgstr ""
+
+#: src/spi:223 src/spi:267 src/spi:367
+msgid "No such package or SlackBuild:"
+msgstr ""
+
+#: src/spi:235
+msgid "The following packages will be installed:"
+msgstr ""
+
+#: src/spi:241
+msgid "The following SlackBuilds will be installed:"
+msgstr ""
+
+#: src/spi:245
+msgid "Nothing to install"
+msgstr ""
+
+#: src/spi:302
+msgid "Updating package cache..."
+msgstr ""
+
+#: src/spi:306
+msgid "Updating SlackBuild cache..."
+msgstr ""
+
+#: src/spi:420
+msgid "USAGE:"
+msgstr "USO:"
+
+#: src/spi:420
+msgid "[OPTIONS] [STRING(s)]"
+msgstr ""
+
+#: src/spi:422
+msgid "OPTIONS:"
+msgstr "OPTIONES:"
+
+#: src/spi:423
+msgid "search for specified packages (default action)"
+msgstr ""
+
+#: src/spi:424
+msgid "show details about package or SlackBuild"
+msgstr ""
+
+#: src/spi:425
+msgid "purge package and SlackBuild caches"
+msgstr ""
+
+#: src/spi:426
+msgid "update package and SlackBuild caches"
+msgstr ""
+
+#: src/spi:427
+msgid "upgrade packages"
+msgstr ""
+
+#: src/spi:428
+msgid "install specified packages"
+msgstr ""
+
+#: src/spi:429
+msgid "simulate installation of specified packages"
+msgstr ""
+
+#: src/spi:430
+msgid "disable colour output"
+msgstr ""
+
+#: src/spi:431
+msgid "this help message"
+msgstr "iste message da adjuta"
