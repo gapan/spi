@@ -449,7 +449,7 @@ def slaptsrcdeps(pkg):
         decoded_line = line.decode()
         if decoded_line.startswith('SlackBuild Requires:'):
             data = decoded_line.partition(':')[2]
-    newdeps = data.replace('\n', ',').strip(' ').split(',')
+    newdeps = data.replace(' ', ',').replace('\n', ',').strip(' ').split(',')
     for i in newdeps:
         if i != '' and i != '%README%':
             if i not in deps:
